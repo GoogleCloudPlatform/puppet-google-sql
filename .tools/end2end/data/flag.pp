@@ -1,4 +1,4 @@
-# Copyright 2017 Google Inc.
+# Copyright 2018 Google Inc.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -40,7 +40,7 @@
 # command line you can pass it via Facter:
 #
 #   FACTER_cred_path=/path/to/my/cred.json \
-#       puppet apply .tests/end2end/data/tier.pp
+#       puppet apply .tools/end2end/data/flag.pp
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -55,8 +55,9 @@ gauth_credential { 'mycred':
   ],
 }
 
-gsql_tier { 'puppet-e2e-D0':
-  ram        => 134217728, # we'll confirm that tier has enough RAM for us
+gsql_flag { 'puppet-e2e-group_concat_max_len':
+  min_value  => 4,
+  max_value  => 4294967295,
   project    => 'google.com:graphite-playground',
   credential => 'mycred',
 }

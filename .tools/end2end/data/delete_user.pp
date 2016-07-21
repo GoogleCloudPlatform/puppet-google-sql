@@ -1,4 +1,4 @@
-# Copyright 2017 Google Inc.
+# Copyright 2018 Google Inc.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -40,7 +40,7 @@
 # command line you can pass it via Facter:
 #
 #   FACTER_cred_path=/path/to/my/cred.json \
-#       puppet apply .tests/end2end/data/database.pp
+#       puppet apply .tools/end2end/data/delete_user.pp
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -71,7 +71,7 @@ gauth_credential { 'mycred':
 if !defined('$sql_instance_suffix') {
   fail('For this example to run you need to define a fact named
        "sql_instance_suffix". Please refer to the documentation inside
-       the example file ".tests/end2end/data/database.pp"')
+       the example file ".tools/end2end/data/delete_user.pp"')
 }
 
 gsql_instance { "puppet-e2e-sql-test-${sql_instance_suffix}":
@@ -80,9 +80,9 @@ gsql_instance { "puppet-e2e-sql-test-${sql_instance_suffix}":
   credential => 'mycred',
 }
 
-gsql_database { 'puppet-e2e-webstore':
-  ensure     => present,
-  charset    => 'utf8',
+gsql_user { 'john.doe':
+  ensure     => absent,
+  host       => '10.1.2.3',
   instance   => "puppet-e2e-sql-test-${sql_instance_suffix}",
   project    => 'google.com:graphite-playground',
   credential => 'mycred',

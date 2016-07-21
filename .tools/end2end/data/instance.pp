@@ -1,4 +1,4 @@
-# Copyright 2017 Google Inc.
+# Copyright 2018 Google Inc.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -40,7 +40,7 @@
 # command line you can pass it via Facter:
 #
 #   FACTER_cred_path=/path/to/my/cred.json \
-#       puppet apply .tests/end2end/data/delete_instance.pp
+#       puppet apply .tools/end2end/data/instance.pp
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -69,11 +69,25 @@ gauth_credential { 'mycred':
 if !defined('$sql_instance_suffix') {
   fail('For this example to run you need to define a fact named
        "sql_instance_suffix". Please refer to the documentation inside
-       the example file ".tests/end2end/data/delete_instance.pp"')
+       the example file ".tools/end2end/data/instance.pp"')
 }
 
 gsql_instance { "puppet-e2e-sql-test-${sql_instance_suffix}":
-  ensure     => absent,
-  project    => 'google.com:graphite-playground',
-  credential => 'mycred',
+  ensure           => present,
+  database_version => 'MYSQL_5_7',
+  settings         => {
+    ip_configuration => {
+      authorized_networks => [
+        # The ACL below is for example only. (do NOT use in production as-is)
+        {
+          name  => 'google dns server',
+          value => '8.8.8.8/32'
+        },
+      ],
+    },
+    tier             => 'db-n1-standard-1'
+  },
+  region           => 'us-central1',
+  project          => 'google.com:graphite-playground',
+  credential       => 'mycred',
 }
