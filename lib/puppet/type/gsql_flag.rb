@@ -35,14 +35,16 @@ Puppet::Type.newtype(:gsql_flag) do
   @doc = 'Represents a flag that can be configured for a Cloud SQL instance.'
 
   autorequire(:gauth_credential) do
-    [self[:credential]]
+    credential = self[:credential]
+    raise "#{ref}: required property 'credential' is missing" if credential.nil?
+    [credential]
   end
 
   newparam :credential do
-    desc <<-EOT
+    desc <<-DESC
       A gauth_credential name to be used to authenticate with Google Cloud
       Platform.
-    EOT
+    DESC
   end
 
   newparam(:project) do
@@ -56,10 +58,10 @@ Puppet::Type.newtype(:gsql_flag) do
 
   newproperty(:allowed_string_values,
               parent: Google::Sql::Property::StringArray) do
-    desc <<-EOT
+    desc <<-DOC
       For STRING flags, List of strings that the value can be set to. (output
       only)
-    EOT
+    DOC
   end
 
   newproperty(:applies_to, parent: Google::Sql::Property::StringArray) do
@@ -75,26 +77,26 @@ Puppet::Type.newtype(:gsql_flag) do
   end
 
   newproperty(:name, parent: Google::Sql::Property::String) do
-    desc <<-EOT
+    desc <<-DOC
       This is the name of the flag. Flag names always use underscores, not
       hyphens, e.g. max_allowed_packet
-    EOT
+    DOC
   end
 
   newproperty(:requires_restart, parent: Google::Sql::Property::Boolean) do
-    desc <<-EOT
+    desc <<-DOC
       Indicates whether changing this flag will trigger a database restart.
       Only applicable to Second Generation instances. (output only)
-    EOT
+    DOC
     newvalue(:true)
     newvalue(:false)
   end
 
   newproperty(:type, parent: Google::Sql::Property::String) do
-    desc <<-EOT
+    desc <<-DOC
       The type of the flag. Flags are typed to being BOOLEAN, STRING, INTEGER
       or NONE. NONE is used for flags which do not take a value, such as
       skip_grant_tables. (output only)
-    EOT
+    DOC
   end
 end

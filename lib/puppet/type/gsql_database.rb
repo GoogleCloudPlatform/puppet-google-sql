@@ -30,26 +30,30 @@ require 'google/sql/property/string'
 require 'puppet'
 
 Puppet::Type.newtype(:gsql_database) do
-  @doc = <<-EOT
+  @doc = <<-DOC
     Represents a SQL database inside the Cloud SQL instance, hosted in Google's
     cloud.
-  EOT
+  DOC
 
   autorequire(:gauth_credential) do
-    [self[:credential]]
+    credential = self[:credential]
+    raise "#{ref}: required property 'credential' is missing" if credential.nil?
+    [credential]
   end
 
   autorequire(:gsql_instance) do
-    self[:instance].autorequires
+    reference = self[:instance]
+    raise "#{ref} required property 'instance' is missing" if reference.nil?
+    reference.autorequires
   end
 
   ensurable
 
   newparam :credential do
-    desc <<-EOT
+    desc <<-DESC
       A gauth_credential name to be used to authenticate with Google Cloud
       Platform.
-    EOT
+    DESC
   end
 
   newparam(:project) do
@@ -74,9 +78,9 @@ Puppet::Type.newtype(:gsql_database) do
   end
 
   newproperty(:name, parent: Google::Sql::Property::String) do
-    desc <<-EOT
+    desc <<-DOC
       The name of the database in the Cloud SQL instance. This does not include
       the project ID or instance name.
-    EOT
+    DOC
   end
 end

@@ -94,6 +94,7 @@ puppet-codegen:
   * .tests/end2end/data/ssl_cert.pp
   * .tests/end2end/data/tier.pp
   * .tests/end2end/data/user.pp
+  * CHANGELOG.md
   * CONTRIBUTING.md
   * examples/database.pp
   * examples/delete_database.pp
@@ -107,6 +108,8 @@ puppet-codegen:
   * Gemfile
   * lib/google/hash_utils.rb
   * lib/google/object_store.rb
+  * lib/google/sql/api/gsql_instance.rb
+  * lib/google/sql/api/gsql_user.rb
   * lib/google/sql/network/base.rb
   * lib/google/sql/network/delete.rb
   * lib/google/sql/network/get.rb
@@ -129,6 +132,7 @@ puppet-codegen:
   * lib/google/sql/property/string_array.rb
   * lib/google/sql/property/time.rb
   * lib/google/string_utils.rb
+  * lib/puppet/functions/gsql_instance_ip.rb
   * lib/puppet/provider/gsql_database/google.rb
   * lib/puppet/provider/gsql_flag/google.rb
   * lib/puppet/provider/gsql_instance/google.rb
@@ -205,6 +209,11 @@ puppet-codegen:
   * spec/spec_helper.rb
   * spec/string_utils_spec.rb
   * spec/test_constants.rb
+  * tasks/clone.json
+  * tasks/clone.rb
+  * tasks/passwd.json
+  * tasks/passwd.rb
+  * tasks/README.md
 
 The list below contains all the files that were automatically sourced from a
 central location:
@@ -213,6 +222,7 @@ central location:
   * Gemfile.lock
   * LICENSE
   * spec/data/poor_example.pp
+  * spec/stubs/google/authorization.rb
 
 [ruby-style-guide]: https://github.com/bbatsov/ruby-style-guide
 [rubocop]: https://rubocop.readthedocs.io/en/latest/

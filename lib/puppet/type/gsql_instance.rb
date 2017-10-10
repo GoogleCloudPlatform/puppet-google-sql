@@ -42,23 +42,25 @@ require 'google/sql/property/time'
 require 'puppet'
 
 Puppet::Type.newtype(:gsql_instance) do
-  @doc = <<-EOT
+  @doc = <<-DOC
     Represents a Cloud SQL instance. Cloud SQL instances are SQL databases
     hosted in Google's cloud. The Instances resource provides methods for
     common configuration and management tasks.
-  EOT
+  DOC
 
   autorequire(:gauth_credential) do
-    [self[:credential]]
+    credential = self[:credential]
+    raise "#{ref}: required property 'credential' is missing" if credential.nil?
+    [credential]
   end
 
   ensurable
 
   newparam :credential do
-    desc <<-EOT
+    desc <<-DESC
       A gauth_credential name to be used to authenticate with Google Cloud
       Platform.
-    EOT
+    DESC
   end
 
   newparam(:project) do
@@ -71,11 +73,11 @@ Puppet::Type.newtype(:gsql_instance) do
   end
 
   newproperty(:backend_type, parent: Google::Sql::Property::Enum) do
-    desc <<-EOT
+    desc <<-DOC
       * FIRST_GEN: First Generation instance. MySQL only. * SECOND_GEN: Second
       Generation instance or PostgreSQL instance. * EXTERNAL: A database server
       that is not managed by Google.
-    EOT
+    DOC
     newvalue(:FIRST_GEN)
     newvalue(:SECOND_GEN)
     newvalue(:EXTERNAL)
@@ -86,12 +88,12 @@ Puppet::Type.newtype(:gsql_instance) do
   end
 
   newproperty(:database_version, parent: Google::Sql::Property::Enum) do
-    desc <<-EOT
+    desc <<-DOC
       The database engine type and version. For First Generation instances, can
       be MYSQL_5_5, or MYSQL_5_6. For Second Generation instances, can be
       MYSQL_5_6 or MYSQL_5_7. Defaults to MYSQL_5_6. The databaseVersion
       property can not be changed after instance creation.
-    EOT
+    DOC
     newvalue(:MYSQL_5_5)
     newvalue(:MYSQL_5_6)
     newvalue(:MYSQL_5_7)
@@ -99,20 +101,20 @@ Puppet::Type.newtype(:gsql_instance) do
 
   newproperty(:failover_replica,
               parent: Google::Sql::Property::InstancFailoveReplica) do
-    desc <<-EOT
+    desc <<-DOC
       The name and status of the failover replica. This property is applicable
       only to Second Generation instances.
-    EOT
+    DOC
   end
 
   newproperty(:instance_type, parent: Google::Sql::Property::Enum) do
-    desc <<-EOT
+    desc <<-DOC
       The instance type. This can be one of the following. *
       CLOUD_SQL_INSTANCE: A Cloud SQL instance that is not replicating  from a
       master. * ON_PREMISES_INSTANCE: An instance running on the customer's
       premises. * READ_REPLICA_INSTANCE: A Cloud SQL instance configured as a
       read-replica.
-    EOT
+    DOC
     newvalue(:CLOUD_SQL_INSTANCE)
     newvalue(:ON_PREMISES_INSTANCE)
     newvalue(:READ_REPLICA_INSTANCE)
@@ -124,17 +126,17 @@ Puppet::Type.newtype(:gsql_instance) do
   end
 
   newproperty(:ipv6_address, parent: Google::Sql::Property::String) do
-    desc <<-EOT
+    desc <<-DOC
       The IPv6 address assigned to the instance. This property is applicable
       only to First Generation instances.
-    EOT
+    DOC
   end
 
   newproperty(:master_instance_name, parent: Google::Sql::Property::String) do
-    desc <<-EOT
+    desc <<-DOC
       The name of the instance which will act as master in the replication
       setup.
-    EOT
+    DOC
   end
 
   newproperty(:max_disk_size, parent: Google::Sql::Property::Integer) do
@@ -146,10 +148,10 @@ Puppet::Type.newtype(:gsql_instance) do
   end
 
   newproperty(:region, parent: Google::Sql::Property::String) do
-    desc <<-EOT
+    desc <<-DOC
       The geographical region. Defaults to us-central or us-central1 depending
       on the instance type (First Generation or Second Generation/PostgreSQL).
-    EOT
+    DOC
   end
 
   newproperty(:replica_configuration,

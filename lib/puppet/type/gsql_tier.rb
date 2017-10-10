@@ -31,23 +31,25 @@ require 'google/sql/property/string_array'
 require 'puppet'
 
 Puppet::Type.newtype(:gsql_tier) do
-  @doc = <<-EOT
+  @doc = <<-DOC
     The Tiers resource represents a service configuration that can be used to
     define a Cloud SQL instance. Each tier has an associated RAM, maximum
     storage, and list of regions in which the tier can be used. Available tiers
     vary depending on whether you use PostgreSQL, MySQL Second Generation, or
     MySQL First Generation instances.
-  EOT
+  DOC
 
   autorequire(:gauth_credential) do
-    [self[:credential]]
+    credential = self[:credential]
+    raise "#{ref}: required property 'credential' is missing" if credential.nil?
+    [credential]
   end
 
   newparam :credential do
-    desc <<-EOT
+    desc <<-DESC
       A gauth_credential name to be used to authenticate with Google Cloud
       Platform.
-    EOT
+    DESC
   end
 
   newparam(:project) do
@@ -55,10 +57,10 @@ Puppet::Type.newtype(:gsql_tier) do
   end
 
   newparam(:tier, namevar: true, parent: Google::Sql::Property::String) do
-    desc <<-EOT
+    desc <<-DOC
       An identifier for the service tier or machine type, for example,
       db-n1-standard-1. For related information.
-    EOT
+    DOC
   end
 
   newproperty(:disk_quota, parent: Google::Sql::Property::Integer) do

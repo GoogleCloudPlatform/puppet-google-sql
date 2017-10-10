@@ -1,5 +1,7 @@
 # Google Cloud SQL Puppet Module
 
+[![Puppet Forge](http://img.shields.io/puppetforge/v/google/gsql.svg)](https://forge.puppetlabs.com/google/gsql)
+
 #### Table of Contents
 
 1. [Module Description - What the module does and why it is useful](
@@ -8,6 +10,9 @@
 3. [Usage - Configuration options and additional functionality](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](
    #reference)
+    - [Classes](#classes)
+    - [Functions](#functions)
+    - [Bolt Tasks](#bolt-tasks)
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
 
@@ -779,6 +784,89 @@ Required.  An identifier for the service tier or machine type, for example,
 
 * `region`: Output only.
   The applicable regions for this tier.
+
+
+### Functions
+
+
+#### `gsql_instance_ip`
+
+  Returns the IP address associated with the SQL instance managed by a
+  `gsql_instance` resource.
+
+##### Arguments
+
+  - `name`:
+    the name of the SQL instance resource
+
+  - `project`:
+    the project name where resource is allocated
+
+  - `cred`:
+    the credential to use to authorize the information request
+
+##### Examples
+
+```puppet
+gsql_instance_ip('my-db', 'my-project', $fn_auth)
+```
+
+##### Notes
+
+  The credential parameter should be allocated with a
+  `gauth_credential_*_for_function` call.
+
+
+### Bolt Tasks
+
+
+#### `tasks/clone.rb`
+
+  Clone a CloudSQL database (requires backups and binary logs to be
+  previously enabled)
+
+This task takes inputs as JSON from standard input.
+
+##### Arguments
+
+  - `name`:
+    Name of the instance to clone
+
+  - `target`:
+    Name of new instance (default: <name>-clone-<timestamp>)
+
+  - `project`:
+    The project that hosts the Cloud SQL instance
+
+  - `credential`:
+    Path to a service account credentials file
+
+
+#### `tasks/passwd.rb`
+
+  Allow resetting Cloud SQL password for existing users
+
+This task takes inputs as JSON from standard input.
+
+##### Arguments
+
+  - `name`:
+    The user that will have its password reset (default: root)
+
+  - `host`:
+    Host ACL for user (default: '%' [all hosts])
+
+  - `password`:
+    Password to set the user to
+
+  - `instance`:
+    Name of the SQL instance to manipulate users on
+
+  - `project`:
+    The project that hosts the Cloud SQL instance
+
+  - `credential`:
+    Path to a service account credentials file
 
 
 ## Limitations

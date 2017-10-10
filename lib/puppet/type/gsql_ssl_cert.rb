@@ -31,26 +31,30 @@ require 'google/sql/property/time'
 require 'puppet'
 
 Puppet::Type.newtype(:gsql_ssl_cert) do
-  @doc = <<-EOT
+  @doc = <<-DOC
     Represents an SSL certificate created for a Cloud SQL instance. To use the
     SSL certificate you must have the SSL Client Certificate and the associated
     SSL Client Key. The Client Key can be downloaded only when the SSL
     certificate is created with the insert method.
-  EOT
+  DOC
 
   autorequire(:gauth_credential) do
-    [self[:credential]]
+    credential = self[:credential]
+    raise "#{ref}: required property 'credential' is missing" if credential.nil?
+    [credential]
   end
 
   autorequire(:gsql_instance) do
-    self[:instance].autorequires
+    reference = self[:instance]
+    raise "#{ref} required property 'instance' is missing" if reference.nil?
+    reference.autorequires
   end
 
   newparam :credential do
-    desc <<-EOT
+    desc <<-DESC
       A gauth_credential name to be used to authenticate with Google Cloud
       Platform.
-    EOT
+    DESC
   end
 
   newparam(:project) do
@@ -79,16 +83,16 @@ Puppet::Type.newtype(:gsql_ssl_cert) do
   end
 
   newproperty(:create_time, parent: Google::Sql::Property::Time) do
-    desc <<-EOT
+    desc <<-DOC
       The time when the certificate was created in RFC 3339 format, for example
       2012-11-15T16:19:00.094Z.
-    EOT
+    DOC
   end
 
   newproperty(:expiration_time, parent: Google::Sql::Property::Time) do
-    desc <<-EOT
+    desc <<-DOC
       The time when the certificate expires in RFC 3339 format, for example
       2012-11-15T16:19:00.094Z.
-    EOT
+    DOC
   end
 end

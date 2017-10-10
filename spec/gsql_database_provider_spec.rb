@@ -455,7 +455,9 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
         # Ensure absent: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
           before(:each) do
-            expect_network_get_failed 1, name: 'title0'
+            expect_network_get_failed 1,
+                                      name: 'title0',
+                                      instance: 'test name#0 data'
             expect_network_get_success_instance 1
           end
 
@@ -496,7 +498,7 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
         # Ensure absent: resource missing, ignore, has name, pass
         context 'title != name (pass)' do
           before(:each) do
-            expect_network_get_failed 1
+            expect_network_get_failed 1, instance: 'test name#0 data'
             expect_network_get_success_instance 1
           end
 
@@ -540,7 +542,9 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
         # Ensure absent: resource exists, ignore, no name, pass
         context 'title == name (pass)' do
           before(:each) do
-            expect_network_get_success 1, name: 'title0'
+            expect_network_get_success 1,
+                                       name: 'title0',
+                                       instance: 'test name#0 data'
             expect_network_delete 1, 'title0', instance: 'test name#0 data'
             expect_network_get_async 1,
                                      name: 'title0',
@@ -585,7 +589,7 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
         # Ensure absent: resource exists, ignore, has name, pass
         context 'title != name (pass)' do
           before(:each) do
-            expect_network_get_success 1
+            expect_network_get_success 1, instance: 'test name#0 data'
             expect_network_delete 1, nil, instance: 'test name#0 data'
             expect_network_get_async 1, instance: 'test name#0 data'
             expect_network_get_success_instance 1

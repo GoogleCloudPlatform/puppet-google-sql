@@ -30,25 +30,29 @@ require 'google/sql/property/string'
 require 'puppet'
 
 Puppet::Type.newtype(:gsql_user) do
-  @doc = <<-EOT
+  @doc = <<-DOC
     The Users resource represents a database user in a Cloud SQL instance.
-  EOT
+  DOC
 
   autorequire(:gauth_credential) do
-    [self[:credential]]
+    credential = self[:credential]
+    raise "#{ref}: required property 'credential' is missing" if credential.nil?
+    [credential]
   end
 
   autorequire(:gsql_instance) do
-    self[:instance].autorequires
+    reference = self[:instance]
+    raise "#{ref} required property 'instance' is missing" if reference.nil?
+    reference.autorequires
   end
 
   ensurable
 
   newparam :credential do
-    desc <<-EOT
+    desc <<-DESC
       A gauth_credential name to be used to authenticate with Google Cloud
       Platform.
-    EOT
+    DESC
   end
 
   newparam(:project) do
@@ -69,12 +73,12 @@ Puppet::Type.newtype(:gsql_user) do
   end
 
   newproperty(:host, parent: Google::Sql::Property::String) do
-    desc <<-EOT
+    desc <<-DOC
       The host name from which the user can connect. For insert operations,
       host defaults to an empty string. For update operations, host is
       specified as part of the request URL. The host name cannot be updated
       after insertion.
-    EOT
+    DOC
   end
 
   newproperty(:name, parent: Google::Sql::Property::String) do
