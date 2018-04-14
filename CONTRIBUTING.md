@@ -85,15 +85,16 @@ puppet-codegen:
 
   * .gitignore
   * .rubocop.yml
-  * .tests/end2end/data/database.pp
-  * .tests/end2end/data/delete_database.pp
-  * .tests/end2end/data/delete_instance.pp
-  * .tests/end2end/data/delete_user.pp
-  * .tests/end2end/data/flag.pp
-  * .tests/end2end/data/instance.pp
-  * .tests/end2end/data/ssl_cert.pp
-  * .tests/end2end/data/tier.pp
-  * .tests/end2end/data/user.pp
+  * .tools/end2end/data/database.pp
+  * .tools/end2end/data/delete_database.pp
+  * .tools/end2end/data/delete_instance.pp
+  * .tools/end2end/data/delete_user.pp
+  * .tools/end2end/data/flag.pp
+  * .tools/end2end/data/instance.pp
+  * .tools/end2end/data/instance~postgres.pp
+  * .tools/end2end/data/ssl_cert.pp
+  * .tools/end2end/data/tier.pp
+  * .tools/end2end/data/user.pp
   * CHANGELOG.md
   * CONTRIBUTING.md
   * examples/database.pp
@@ -102,6 +103,7 @@ puppet-codegen:
   * examples/delete_user.pp
   * examples/flag.pp
   * examples/instance.pp
+  * examples/instance~postgres.pp
   * examples/ssl_cert.pp
   * examples/tier.pp
   * examples/user.pp
@@ -218,7 +220,7 @@ puppet-codegen:
 The list below contains all the files that were automatically sourced from a
 central location:
 
-  * .tests/README.md
+  * .tools/README.md
   * Gemfile.lock
   * LICENSE
   * spec/data/poor_example.pp

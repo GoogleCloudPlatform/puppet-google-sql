@@ -40,7 +40,7 @@
 # command line you can pass it via Facter:
 #
 #   FACTER_cred_path=/path/to/my/cred.json \
-#       puppet apply examples/delete_database.pp
+#       puppet apply .tools/end2end/data/delete_database.pp
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -71,18 +71,18 @@ gauth_credential { 'mycred':
 if !defined('$sql_instance_suffix') {
   fail('For this example to run you need to define a fact named
        "sql_instance_suffix". Please refer to the documentation inside
-       the example file "examples/delete_database.pp"')
+       the example file ".tools/end2end/data/delete_database.pp"')
 }
 
-gsql_instance { "sql-test-${sql_instance_suffix}":
+gsql_instance { "puppet-e2e-sql-test-${sql_instance_suffix}":
   ensure     => present,
   project    => 'google.com:graphite-playground',
   credential => 'mycred',
 }
 
-gsql_database { 'webstore':
+gsql_database { 'puppet-e2e-webstore':
   ensure     => absent,
-  instance   => "sql-test-${sql_instance_suffix}",
+  instance   => "puppet-e2e-sql-test-${sql_instance_suffix}",
   project    => 'google.com:graphite-playground',
   credential => 'mycred',
 }

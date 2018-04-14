@@ -40,7 +40,7 @@
 # command line you can pass it via Facter:
 #
 #   FACTER_cred_path=/path/to/my/cred.json \
-#       puppet apply examples/delete_database.pp
+#       puppet apply .tools/end2end/data/delete_instance.pp
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -55,34 +55,25 @@ gauth_credential { 'mycred':
   ],
 }
 
-# TODO(alexstephen): Change this warning and remove the "requires to to exists"
-# once a resource reference is added (it will enforce that automatically).
-#
-# This example requires an instance to exist. You should set
-# FACTER_sql_instance_suffix, or use any other Puppet # supported way, to set a
-# global variable $sql_instance_suffix.
+# Cloud SQL cannot reuse instance names. Add a random suffix so they are always
+# unique. You should set FACTER_sql_instance_suffix, or use any other Puppet
+# supported way, to set a global variable $sql_instance_suffix.
 #
 # For example you can define the fact to be an always increasing value:
 #
-# $ FACTER_sql_instance_suffix=100 puppet apply examples/database.pp
+# $ FACTER_sql_instance_suffix=$(date +%s) puppet apply examples/instance.pp
 #
-# If that instance does not exist in your project run the examples/instance.pp
-# to create it, with the same $sql_instance_suffix.
+# To be able to delete the instance via Puppet make sure the instance ID matches
+# the ID used during creation. If you used the create example and specified the
+# 'sql_instance_suffix', you should match it as well during deletion.
 if !defined('$sql_instance_suffix') {
   fail('For this example to run you need to define a fact named
        "sql_instance_suffix". Please refer to the documentation inside
-       the example file "examples/delete_database.pp"')
+       the example file ".tools/end2end/data/delete_instance.pp"')
 }
 
-gsql_instance { "sql-test-${sql_instance_suffix}":
-  ensure     => present,
-  project    => 'google.com:graphite-playground',
-  credential => 'mycred',
-}
-
-gsql_database { 'webstore':
+gsql_instance { "puppet-e2e-sql-test-${sql_instance_suffix}":
   ensure     => absent,
-  instance   => "sql-test-${sql_instance_suffix}",
   project    => 'google.com:graphite-playground',
   credential => 'mycred',
 }
