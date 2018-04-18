@@ -26,7 +26,7 @@
 # ----------------------------------------------------------------------------
 
 require 'google/sql/property/array'
-require 'puppet/property'
+require 'google/sql/property/base'
 
 module Google
   module Sql
@@ -110,7 +110,7 @@ module Google
 
     module Property
       # A class to manage input to authorized_networks for instance.
-      class InstancAuthoriNetwork < Puppet::Property
+      class InstancAuthoriNetwork < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
           self.class.unsafe_munge(value)

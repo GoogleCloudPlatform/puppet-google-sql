@@ -25,7 +25,7 @@
 #
 # ----------------------------------------------------------------------------
 
-require 'puppet/property'
+require 'google/sql/property/base'
 
 module Google
   module Sql
@@ -106,7 +106,7 @@ module Google
 
     module Property
       # A class to manage input to settings for instance.
-      class InstanceSettings < Puppet::Property
+      class InstanceSettings < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
           self.class.unsafe_munge(value)
