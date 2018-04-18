@@ -1,4 +1,4 @@
-# Copyright 2017 Google Inc.
+# Copyright 2018 Google Inc.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -40,7 +40,7 @@
 # command line you can pass it via Facter:
 #
 #   FACTER_cred_path=/path/to/my/cred.json \
-#       puppet apply examples/database.pp
+#       puppet apply examples/instance~postgres.pp
 #
 # For convenience you optionally can add it to your ~/.bash_profile (or the
 # respective .profile settings) environment:
@@ -55,35 +55,39 @@ gauth_credential { 'mycred':
   ],
 }
 
-# TODO(alexstephen): Change this warning and remove the "requires to to exists"
-# once a resource reference is added (it will enforce that automatically).
-#
-# This example requires an instance to exist. You should set
-# FACTER_sql_instance_suffix, or use any other Puppet # supported way, to set a
-# global variable $sql_instance_suffix.
+# Cloud SQL cannot reuse instance names. Add a random suffix so they are always
+# unique. You should set FACTER_sql_instance_suffix, or use any other Puppet
+# supported way, to set a global variable $sql_instance_suffix.
 #
 # For example you can define the fact to be an always increasing value:
 #
-# $ FACTER_sql_instance_suffix=100 puppet apply examples/database.pp
+# $ FACTER_sql_instance_suffix=$(date +%s) puppet apply examples/instance.pp
 #
-# If that instance does not exist in your project run the examples/instance.pp
-# to create it, with the same $sql_instance_suffix.
+# To be able to delete the instance via Puppet make sure the instance ID matches
+# the ID used during creation. If you used the create example and specified the
+# 'sql_instance_suffix', you should match it as well during deletion.
 if !defined('$sql_instance_suffix') {
   fail('For this example to run you need to define a fact named
        "sql_instance_suffix". Please refer to the documentation inside
-       the example file "examples/database.pp"')
+       the example file "examples/instance~postgres.pp"')
 }
 
 gsql_instance { "sql-test-${sql_instance_suffix}":
-  ensure     => present,
-  project    => 'google.com:graphite-playground',
-  credential => 'mycred',
-}
-
-gsql_database { 'webstore':
-  ensure     => present,
-  charset    => 'utf8',
-  instance   => "sql-test-${sql_instance_suffix}",
-  project    => 'google.com:graphite-playground',
-  credential => 'mycred',
+  ensure           => present,
+  database_version => 'POSTGRES_9_6',
+  settings         => {
+    ip_configuration => {
+      authorized_networks => [
+        # The ACL below is for example only. (do NOT use in production as-is)
+        {
+          name  => 'google dns server',
+          value => '8.8.8.8/32'
+        },
+      ],
+    },
+    tier             => 'db-custom-2-8192'
+  },
+  region           => 'us-central1',
+  project          => 'google.com:graphite-playground',
+  credential       => 'mycred',
 }

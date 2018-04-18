@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 (2017-10-19)
+
+### New features
+
+- Added PostgreSQL support.
+
 ## 0.2.0 (2017-10-10)
 
 ### New features
