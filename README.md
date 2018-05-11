@@ -540,7 +540,8 @@ gsql_database { 'id-of-resource':
 
 ##### `instance`
 
-Required.  A reference to Instance resource
+Required.  The name of the Cloud SQL instance. This does not include the project
+  ID.
 
 
 #### `gsql_user`
@@ -589,7 +590,8 @@ Required.  The name of the user in the Cloud SQL instance.
 
 ##### `instance`
 
-Required.  A reference to Instance resource
+Required.  The name of the Cloud SQL instance. This does not include the project
+  ID.
 
 ##### `password`
 
@@ -659,7 +661,8 @@ gsql_ssl_cert { 'id-of-resource':
 
 ##### `instance`
 
-Required.  A reference to Instance resource
+Required.  The name of the Cloud SQL instance. This does not include the project
+  ID.
 
 ##### `sha1_fingerprint`
 
