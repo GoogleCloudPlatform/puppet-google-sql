@@ -62,7 +62,9 @@ Puppet::Type.newtype(:gsql_ssl_cert) do
   end
 
   newparam(:instance, parent: Google::Sql::Property::InstancNameRef) do
-    desc 'A reference to Instance resource'
+    desc <<-DOC
+      The name of the Cloud SQL instance. This does not include the project ID.
+    DOC
   end
 
   newparam(:sha1_fingerprint, namevar: true,
