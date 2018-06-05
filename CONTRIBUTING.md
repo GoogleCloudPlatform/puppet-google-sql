@@ -108,8 +108,6 @@ puppet-codegen:
   * examples/tier.pp
   * examples/user.pp
   * Gemfile
-  * lib/google/hash_utils.rb
-  * lib/google/object_store.rb
   * lib/google/sql/api/gsql_instance.rb
   * lib/google/sql/api/gsql_user.rb
   * lib/google/sql/network/base.rb
@@ -133,7 +131,6 @@ puppet-codegen:
   * lib/google/sql/property/string.rb
   * lib/google/sql/property/string_array.rb
   * lib/google/sql/property/time.rb
-  * lib/google/string_utils.rb
   * lib/puppet/functions/gsql_instance_ip.rb
   * lib/puppet/provider/gsql_database/google.rb
   * lib/puppet/provider/gsql_flag/google.rb
@@ -151,12 +148,6 @@ puppet-codegen:
   * README.md
   * spec/.rubocop.yml
   * spec/bundle.rb
-  * spec/copyright.rb
-  * spec/copyright_spec.rb
-  * spec/data/copyright_bad1.rb
-  * spec/data/copyright_bad2.rb
-  * spec/data/copyright_good1.rb
-  * spec/data/copyright_good2.rb
   * spec/data/network/gsql_database/success1~name.yaml
   * spec/data/network/gsql_database/success1~title.yaml
   * spec/data/network/gsql_database/success2~name.yaml
@@ -200,7 +191,6 @@ puppet-codegen:
   * spec/gsql_ssl_cert_provider_spec.rb
   * spec/gsql_tier_provider_spec.rb
   * spec/gsql_user_provider_spec.rb
-  * spec/hash_utils_spec.rb
   * spec/network_blocker.rb
   * spec/network_blocker_spec.rb
   * spec/network_delete_spec.rb
@@ -209,7 +199,6 @@ puppet-codegen:
   * spec/network_put_spec.rb
   * spec/puppetlint_spec.rb
   * spec/spec_helper.rb
-  * spec/string_utils_spec.rb
   * spec/test_constants.rb
   * tasks/clone.json
   * tasks/clone.rb
@@ -222,8 +211,19 @@ central location:
 
   * .tools/README.md
   * Gemfile.lock
+  * lib/google/hash_utils.rb
+  * lib/google/object_store.rb
+  * lib/google/string_utils.rb
   * LICENSE
+  * spec/copyright.rb
+  * spec/copyright_spec.rb
+  * spec/data/copyright_bad1.rb
+  * spec/data/copyright_bad2.rb
+  * spec/data/copyright_good1.rb
+  * spec/data/copyright_good2.rb
   * spec/data/poor_example.pp
+  * spec/hash_utils_spec.rb
+  * spec/string_utils_spec.rb
   * spec/stubs/google/authorization.rb
 
 [ruby-style-guide]: https://github.com/bbatsov/ruby-style-guide
