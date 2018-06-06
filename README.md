@@ -77,7 +77,7 @@ gsql_instance { "sql-test-${sql_instance_suffix}":
     tier             => 'db-n1-standard-1'
   },
   region           => 'us-central1',
-  project          => 'google.com:graphite-playground',
+  project          => $project, # e.g. 'my-test-project'
   credential       => 'mycred',
 }
 
@@ -91,7 +91,7 @@ gsql_database { 'webstore':
   ensure     => present,
   charset    => 'utf8',
   instance   => "sql-test-${sql_instance_suffix}",
-  project    => 'google.com:graphite-playground',
+  project    => $project, # e.g. 'my-test-project'
   credential => 'mycred',
 }
 
@@ -106,7 +106,7 @@ gsql_user { 'john.doe':
   password   => 'secret-password',
   host       => '10.1.2.3',
   instance   => "sql-test-${sql_instance_suffix}",
-  project    => 'google.com:graphite-playground',
+  project    => $project, # e.g. 'my-test-project'
   credential => 'mycred',
 }
 
@@ -121,7 +121,7 @@ gsql_ssl_cert { 'server-certificate':
   common_name        => 'CN=www.mydb.com,O=Acme',
   sha1_fingerprint   => '8fc295bf77a002db5182e04d92c48258cbc1117a',
   instance           => "sql-test-${sql_instance_suffix}",
-  project            => 'google.com:graphite-playground',
+  project            => $project, # e.g. 'my-test-project'
   credential         => 'mycred',
 }
 
@@ -133,7 +133,7 @@ gsql_ssl_cert { 'server-certificate':
 gsql_flag { 'group_concat_max_len':
   min_value  => 4,
   max_value  => 4294967295,
-  project    => 'google.com:graphite-playground',
+  project    => $project, # e.g. 'my-test-project'
   credential => 'mycred',
 }
 
@@ -144,7 +144,7 @@ gsql_flag { 'group_concat_max_len':
 ```puppet
 gsql_tier { 'D0':
   ram        => 134217728, # we'll confirm that tier has enough RAM for us
-  project    => 'google.com:graphite-playground',
+  project    => $project, # e.g. 'my-test-project'
   credential => 'mycred',
 }
 
@@ -224,7 +224,7 @@ gsql_instance { "sql-test-${sql_instance_suffix}":
     tier             => 'db-n1-standard-1'
   },
   region           => 'us-central1',
-  project          => 'google.com:graphite-playground',
+  project          => $project, # e.g. 'my-test-project'
   credential       => 'mycred',
 }
 
@@ -506,7 +506,7 @@ gsql_database { 'webstore':
   ensure     => present,
   charset    => 'utf8',
   instance   => "sql-test-${sql_instance_suffix}",
-  project    => 'google.com:graphite-playground',
+  project    => $project, # e.g. 'my-test-project'
   credential => 'mycred',
 }
 
@@ -558,7 +558,7 @@ gsql_user { 'john.doe':
   password   => 'secret-password',
   host       => '10.1.2.3',
   instance   => "sql-test-${sql_instance_suffix}",
-  project    => 'google.com:graphite-playground',
+  project    => $project, # e.g. 'my-test-project'
   credential => 'mycred',
 }
 
@@ -615,7 +615,7 @@ gsql_ssl_cert { 'server-certificate':
   common_name        => 'CN=www.mydb.com,O=Acme',
   sha1_fingerprint   => '8fc295bf77a002db5182e04d92c48258cbc1117a',
   instance           => "sql-test-${sql_instance_suffix}",
-  project            => 'google.com:graphite-playground',
+  project            => $project, # e.g. 'my-test-project'
   credential         => 'mycred',
 }
 
@@ -679,7 +679,7 @@ Represents a flag that can be configured for a Cloud SQL instance.
 gsql_flag { 'group_concat_max_len':
   min_value  => 4,
   max_value  => 4294967295,
-  project    => 'google.com:graphite-playground',
+  project    => $project, # e.g. 'my-test-project'
   credential => 'mycred',
 }
 
@@ -750,7 +750,7 @@ Generation, or MySQL First Generation instances.
 ```puppet
 gsql_tier { 'D0':
   ram        => 134217728, # we'll confirm that tier has enough RAM for us
-  project    => 'google.com:graphite-playground',
+  project    => $project, # e.g. 'my-test-project'
   credential => 'mycred',
 }
 
