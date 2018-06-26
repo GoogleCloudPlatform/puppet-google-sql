@@ -518,7 +518,7 @@ gsql_database { 'webstore':
 gsql_database { 'id-of-resource':
   charset    => string,
   collation  => string,
-  instance   => reference to gsql_instance,
+  instance   => reference to a gsql_instance,
   name       => string,
   project    => string,
   credential => reference to gauth_credential,
@@ -569,7 +569,7 @@ gsql_user { 'john.doe':
 ```puppet
 gsql_user { 'id-of-resource':
   host       => string,
-  instance   => reference to gsql_instance,
+  instance   => reference to a gsql_instance,
   name       => string,
   password   => string,
   project    => string,
@@ -630,7 +630,7 @@ gsql_ssl_cert { 'id-of-resource':
   common_name        => string,
   create_time        => time,
   expiration_time    => time,
-  instance           => reference to gsql_instance,
+  instance           => reference to a gsql_instance,
   sha1_fingerprint   => string,
   project            => string,
   credential         => reference to gauth_credential,
