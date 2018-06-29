@@ -50,7 +50,7 @@ module Google
           {
             ipv4_enabled: ipv4_enabled,
             authorized_networks: ['[',
-                                  authorized_networks.map(&:to_json).join(', '),
+                                  (authorized_networks || []).map(&:to_json).join(', '),
                                   ']'].join(' '),
             require_ssl: require_ssl
           }.reject { |_k, v| v.nil? }.map { |k, v| "#{k}: #{v}" }.join(', ')
