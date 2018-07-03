@@ -31,7 +31,7 @@ require 'google/sql/property/base'
 module Google
   module Sql
     module Data
-      # A class to manage data for ip_addresses for instance.
+      # A class to manage data for IpAddresses for instance.
       class InstancIpAddress
         include Comparable
 
@@ -111,7 +111,7 @@ module Google
     end
 
     module Property
-      # A class to manage input to ip_addresses for instance.
+      # A class to manage input to IpAddresses for instance.
       class InstancIpAddress < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)

@@ -31,7 +31,7 @@ require 'google/sql/property/base'
 module Google
   module Sql
     module Data
-      # A class to manage data for authorized_networks for instance.
+      # A class to manage data for AuthorizedNetworks for instance.
       class InstancAuthoriNetwork
         include Comparable
 
@@ -109,7 +109,7 @@ module Google
     end
 
     module Property
-      # A class to manage input to authorized_networks for instance.
+      # A class to manage input to AuthorizedNetworks for instance.
       class InstancAuthoriNetwork < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
