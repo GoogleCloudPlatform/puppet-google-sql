@@ -131,6 +131,7 @@ puppet-codegen:
   * lib/google/sql/property/string.rb
   * lib/google/sql/property/string_array.rb
   * lib/google/sql/property/time.rb
+  * lib/puppet/functions/gcp_declare.rb
   * lib/puppet/functions/gsql_instance_ip.rb
   * lib/puppet/provider/gsql_database/google.rb
   * lib/puppet/provider/gsql_flag/google.rb
