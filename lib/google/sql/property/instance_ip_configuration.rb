@@ -30,7 +30,7 @@ require 'google/sql/property/base'
 module Google
   module Sql
     module Data
-      # A class to manage data for ip_configuration for instance.
+      # A class to manage data for IpConfiguration for instance.
       class InstancIpConfigu
         include Comparable
 
@@ -118,7 +118,7 @@ module Google
     end
 
     module Property
-      # A class to manage input to ip_configuration for instance.
+      # A class to manage input to IpConfiguration for instance.
       class InstancIpConfigu < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)

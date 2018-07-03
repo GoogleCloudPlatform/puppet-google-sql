@@ -30,7 +30,7 @@ require 'google/sql/property/base'
 module Google
   module Sql
     module Data
-      # A class to manage data for settings for instance.
+      # A class to manage data for Settings for instance.
       class InstanceSettings
         include Comparable
 
@@ -105,7 +105,7 @@ module Google
     end
 
     module Property
-      # A class to manage input to settings for instance.
+      # A class to manage input to Settings for instance.
       class InstanceSettings < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)

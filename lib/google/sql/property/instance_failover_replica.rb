@@ -30,7 +30,7 @@ require 'google/sql/property/base'
 module Google
   module Sql
     module Data
-      # A class to manage data for failover_replica for instance.
+      # A class to manage data for FailoverReplica for instance.
       class InstancFailoveReplica
         include Comparable
 
@@ -102,7 +102,7 @@ module Google
     end
 
     module Property
-      # A class to manage input to failover_replica for instance.
+      # A class to manage input to FailoverReplica for instance.
       class InstancFailoveReplica < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
