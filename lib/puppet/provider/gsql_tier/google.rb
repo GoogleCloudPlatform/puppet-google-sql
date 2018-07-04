@@ -26,9 +26,7 @@
 # ----------------------------------------------------------------------------
 
 require 'google/hash_utils'
-require 'google/sql/network/delete'
 require 'google/sql/network/get'
-require 'google/sql/network/post'
 require 'google/sql/network/put'
 require 'google/sql/property/integer'
 require 'google/sql/property/string'
