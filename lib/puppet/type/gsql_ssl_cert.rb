@@ -32,10 +32,9 @@ require 'puppet'
 
 Puppet::Type.newtype(:gsql_ssl_cert) do
   @doc = <<-DOC
-    Represents an SSL certificate created for a Cloud SQL instance. To use the
-    SSL certificate you must have the SSL Client Certificate and the associated
-    SSL Client Key. The Client Key can be downloaded only when the SSL
-    certificate is created with the insert method.
+    Represents an SSL certificate created for a Cloud SQL instance. To use the SSL certificate you
+    must have the SSL Client Certificate and the associated SSL Client Key. The Client Key can be
+    downloaded only when the SSL certificate is created with the insert method.
   DOC
 
   autorequire(:gauth_credential) do
@@ -62,13 +61,10 @@ Puppet::Type.newtype(:gsql_ssl_cert) do
   end
 
   newparam(:instance, parent: Google::Sql::Property::InstancNameRef) do
-    desc <<-DOC
-      The name of the Cloud SQL instance. This does not include the project ID.
-    DOC
+    desc 'The name of the Cloud SQL instance. This does not include the project ID.'
   end
 
-  newparam(:sha1_fingerprint, namevar: true,
-                              parent: Google::Sql::Property::String) do
+  newparam(:sha1_fingerprint, namevar: true, parent: Google::Sql::Property::String) do
     desc 'The SHA-1 of the certificate.'
   end
 

@@ -90,14 +90,10 @@ module Google
       # Data is coming from the GCP API
       class InstancIpConfiguApi < InstancIpConfigu
         def initialize(args)
-          @ipv4_enabled =
-            Google::Sql::Property::Boolean.api_munge(args['ipv4Enabled'])
+          @ipv4_enabled = Google::Sql::Property::Boolean.api_munge(args['ipv4Enabled'])
           @authorized_networks =
-            Google::Sql::Property::InstancAuthoriNetworkArray.api_munge(
-              args['authorizedNetworks']
-            )
-          @require_ssl =
-            Google::Sql::Property::Boolean.api_munge(args['requireSsl'])
+            Google::Sql::Property::InstancAuthoriNetworkArray.api_munge(args['authorizedNetworks'])
+          @require_ssl = Google::Sql::Property::Boolean.api_munge(args['requireSsl'])
         end
       end
 
@@ -105,14 +101,11 @@ module Google
       # Data is coming from the Puppet manifest
       class InstancIpConfiguCatalog < InstancIpConfigu
         def initialize(args)
-          @ipv4_enabled =
-            Google::Sql::Property::Boolean.unsafe_munge(args['ipv4_enabled'])
-          @authorized_networks =
-            Google::Sql::Property::InstancAuthoriNetworkArray.unsafe_munge(
-              args['authorized_networks']
-            )
-          @require_ssl =
-            Google::Sql::Property::Boolean.unsafe_munge(args['require_ssl'])
+          @ipv4_enabled = Google::Sql::Property::Boolean.unsafe_munge(args['ipv4_enabled'])
+          @authorized_networks = Google::Sql::Property::InstancAuthoriNetworkArray.unsafe_munge(
+            args['authorized_networks']
+          )
+          @require_ssl = Google::Sql::Property::Boolean.unsafe_munge(args['require_ssl'])
         end
       end
     end

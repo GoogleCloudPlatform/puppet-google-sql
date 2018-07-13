@@ -79,32 +79,20 @@ Puppet::Type.type(:gsql_instance).provide(:google) do
   def self.fetch_to_hash(fetch)
     {
       backend_type: Google::Sql::Property::Enum.api_munge(fetch['backendType']),
-      connection_name:
-        Google::Sql::Property::String.api_munge(fetch['connectionName']),
-      database_version:
-        Google::Sql::Property::Enum.api_munge(fetch['databaseVersion']),
-      failover_replica: Google::Sql::Property::InstancFailoveReplica.api_munge(
-        fetch['failoverReplica']
-      ),
-      instance_type:
-        Google::Sql::Property::Enum.api_munge(fetch['instanceType']),
-      ip_addresses: Google::Sql::Property::InstancIpAddressArray.api_munge(
-        fetch['ipAddresses']
-      ),
-      ipv6_address:
-        Google::Sql::Property::String.api_munge(fetch['ipv6Address']),
-      master_instance_name:
-        Google::Sql::Property::String.api_munge(fetch['masterInstanceName']),
-      max_disk_size:
-        Google::Sql::Property::Integer.api_munge(fetch['maxDiskSize']),
+      connection_name: Google::Sql::Property::String.api_munge(fetch['connectionName']),
+      database_version: Google::Sql::Property::Enum.api_munge(fetch['databaseVersion']),
+      failover_replica:
+        Google::Sql::Property::InstancFailoveReplica.api_munge(fetch['failoverReplica']),
+      instance_type: Google::Sql::Property::Enum.api_munge(fetch['instanceType']),
+      ip_addresses: Google::Sql::Property::InstancIpAddressArray.api_munge(fetch['ipAddresses']),
+      ipv6_address: Google::Sql::Property::String.api_munge(fetch['ipv6Address']),
+      master_instance_name: Google::Sql::Property::String.api_munge(fetch['masterInstanceName']),
+      max_disk_size: Google::Sql::Property::Integer.api_munge(fetch['maxDiskSize']),
       name: Google::Sql::Property::String.api_munge(fetch['name']),
       region: Google::Sql::Property::String.api_munge(fetch['region']),
       replica_configuration:
-        Google::Sql::Property::InstancReplicaConfigu.api_munge(
-          fetch['replicaConfiguration']
-        ),
-      settings:
-        Google::Sql::Property::InstanceSettings.api_munge(fetch['settings'])
+        Google::Sql::Property::InstancReplicaConfigu.api_munge(fetch['replicaConfiguration']),
+      settings: Google::Sql::Property::InstanceSettings.api_munge(fetch['settings'])
     }.reject { |_, v| v.nil? }
   end
   # rubocop:enable Metrics/MethodLength

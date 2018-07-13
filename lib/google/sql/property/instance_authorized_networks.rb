@@ -89,8 +89,7 @@ module Google
       # Data is coming from the GCP API
       class InstancAuthoriNetworkApi < InstancAuthoriNetwork
         def initialize(args)
-          @expiration_time =
-            Google::Sql::Property::Time.api_munge(args['expirationTime'])
+          @expiration_time = Google::Sql::Property::Time.api_munge(args['expirationTime'])
           @name = Google::Sql::Property::String.api_munge(args['name'])
           @value = Google::Sql::Property::String.api_munge(args['value'])
         end
@@ -100,8 +99,7 @@ module Google
       # Data is coming from the Puppet manifest
       class InstancAuthoriNetworkCatalog < InstancAuthoriNetwork
         def initialize(args)
-          @expiration_time =
-            Google::Sql::Property::Time.unsafe_munge(args['expiration_time'])
+          @expiration_time = Google::Sql::Property::Time.unsafe_munge(args['expiration_time'])
           @name = Google::Sql::Property::String.unsafe_munge(args['name'])
           @value = Google::Sql::Property::String.unsafe_munge(args['value'])
         end

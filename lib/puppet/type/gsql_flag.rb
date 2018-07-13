@@ -56,12 +56,8 @@ Puppet::Type.newtype(:gsql_flag) do
     desc 'The name of the Flag.'
   end
 
-  newproperty(:allowed_string_values,
-              parent: Google::Sql::Property::StringArray) do
-    desc <<-DOC
-      For STRING flags, List of strings that the value can be set to. (output
-      only)
-    DOC
+  newproperty(:allowed_string_values, parent: Google::Sql::Property::StringArray) do
+    desc 'For STRING flags, List of strings that the value can be set to. (output only)'
   end
 
   newproperty(:applies_to, parent: Google::Sql::Property::StringArray) do
@@ -78,15 +74,15 @@ Puppet::Type.newtype(:gsql_flag) do
 
   newproperty(:name, parent: Google::Sql::Property::String) do
     desc <<-DOC
-      This is the name of the flag. Flag names always use underscores, not
-      hyphens, e.g. max_allowed_packet
+      This is the name of the flag. Flag names always use underscores, not hyphens, e.g.
+      max_allowed_packet
     DOC
   end
 
   newproperty(:requires_restart, parent: Google::Sql::Property::Boolean) do
     desc <<-DOC
-      Indicates whether changing this flag will trigger a database restart.
-      Only applicable to Second Generation instances. (output only)
+      Indicates whether changing this flag will trigger a database restart. Only applicable to
+      Second Generation instances. (output only)
     DOC
     newvalue(:true)
     newvalue(:false)
@@ -94,9 +90,8 @@ Puppet::Type.newtype(:gsql_flag) do
 
   newproperty(:type, parent: Google::Sql::Property::String) do
     desc <<-DOC
-      The type of the flag. Flags are typed to being BOOLEAN, STRING, INTEGER
-      or NONE. NONE is used for flags which do not take a value, such as
-      skip_grant_tables. (output only)
+      The type of the flag. Flags are typed to being BOOLEAN, STRING, INTEGER or NONE. NONE is used
+      for flags which do not take a value, such as skip_grant_tables. (output only)
     DOC
   end
 end

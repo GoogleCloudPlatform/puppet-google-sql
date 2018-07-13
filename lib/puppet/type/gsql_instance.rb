@@ -43,9 +43,8 @@ require 'puppet'
 
 Puppet::Type.newtype(:gsql_instance) do
   @doc = <<-DOC
-    Represents a Cloud SQL instance. Cloud SQL instances are SQL databases
-    hosted in Google's cloud. The Instances resource provides methods for
-    common configuration and management tasks.
+    Represents a Cloud SQL instance. Cloud SQL instances are SQL databases hosted in Google's
+    cloud. The Instances resource provides methods for common configuration and management tasks.
   DOC
 
   autorequire(:gauth_credential) do
@@ -74,9 +73,8 @@ Puppet::Type.newtype(:gsql_instance) do
 
   newproperty(:backend_type, parent: Google::Sql::Property::Enum) do
     desc <<-DOC
-      * FIRST_GEN: First Generation instance. MySQL only. * SECOND_GEN: Second
-      Generation instance or PostgreSQL instance. * EXTERNAL: A database server
-      that is not managed by Google.
+      * FIRST_GEN: First Generation instance. MySQL only. * SECOND_GEN: Second Generation instance
+      or PostgreSQL instance. * EXTERNAL: A database server that is not managed by Google.
     DOC
     newvalue(:FIRST_GEN)
     newvalue(:SECOND_GEN)
@@ -89,11 +87,10 @@ Puppet::Type.newtype(:gsql_instance) do
 
   newproperty(:database_version, parent: Google::Sql::Property::Enum) do
     desc <<-DOC
-      The database engine type and version. For First Generation instances, can
-      be MYSQL_5_5, or MYSQL_5_6. For Second Generation instances, can be
-      MYSQL_5_6 or MYSQL_5_7. Defaults to MYSQL_5_6. PostgreSQL instances:
-      POSTGRES_9_6 The databaseVersion property can not be changed after
-      instance creation.
+      The database engine type and version. For First Generation instances, can be MYSQL_5_5, or
+      MYSQL_5_6. For Second Generation instances, can be MYSQL_5_6 or MYSQL_5_7. Defaults to
+      MYSQL_5_6. PostgreSQL instances: POSTGRES_9_6 The databaseVersion property can not be changed
+      after instance creation.
     DOC
     newvalue(:MYSQL_5_5)
     newvalue(:MYSQL_5_6)
@@ -101,20 +98,18 @@ Puppet::Type.newtype(:gsql_instance) do
     newvalue(:POSTGRES_9_6)
   end
 
-  newproperty(:failover_replica,
-              parent: Google::Sql::Property::InstancFailoveReplica) do
+  newproperty(:failover_replica, parent: Google::Sql::Property::InstancFailoveReplica) do
     desc <<-DOC
-      The name and status of the failover replica. This property is applicable
-      only to Second Generation instances.
+      The name and status of the failover replica. This property is applicable only to Second
+      Generation instances.
     DOC
   end
 
   newproperty(:instance_type, parent: Google::Sql::Property::Enum) do
     desc <<-DOC
-      The instance type. This can be one of the following. *
-      CLOUD_SQL_INSTANCE: A Cloud SQL instance that is not replicating  from a
-      master. * ON_PREMISES_INSTANCE: An instance running on the customer's
-      premises. * READ_REPLICA_INSTANCE: A Cloud SQL instance configured as a
+      The instance type. This can be one of the following. * CLOUD_SQL_INSTANCE: A Cloud SQL
+      instance that is not replicating  from a master. * ON_PREMISES_INSTANCE: An instance running
+      on the customer's  premises. * READ_REPLICA_INSTANCE: A Cloud SQL instance configured as a
       read-replica.
     DOC
     newvalue(:CLOUD_SQL_INSTANCE)
@@ -122,23 +117,19 @@ Puppet::Type.newtype(:gsql_instance) do
     newvalue(:READ_REPLICA_INSTANCE)
   end
 
-  newproperty(:ip_addresses,
-              parent: Google::Sql::Property::InstancIpAddressArray) do
+  newproperty(:ip_addresses, parent: Google::Sql::Property::InstancIpAddressArray) do
     desc 'The assigned IP addresses for the instance. (output only)'
   end
 
   newproperty(:ipv6_address, parent: Google::Sql::Property::String) do
     desc <<-DOC
-      The IPv6 address assigned to the instance. This property is applicable
-      only to First Generation instances.
+      The IPv6 address assigned to the instance. This property is applicable only to First
+      Generation instances.
     DOC
   end
 
   newproperty(:master_instance_name, parent: Google::Sql::Property::String) do
-    desc <<-DOC
-      The name of the instance which will act as master in the replication
-      setup.
-    DOC
+    desc 'The name of the instance which will act as master in the replication setup.'
   end
 
   newproperty(:max_disk_size, parent: Google::Sql::Property::Integer) do
@@ -151,13 +142,12 @@ Puppet::Type.newtype(:gsql_instance) do
 
   newproperty(:region, parent: Google::Sql::Property::String) do
     desc <<-DOC
-      The geographical region. Defaults to us-central or us-central1 depending
-      on the instance type (First Generation or Second Generation/PostgreSQL).
+      The geographical region. Defaults to us-central or us-central1 depending on the instance type
+      (First Generation or Second Generation/PostgreSQL).
     DOC
   end
 
-  newproperty(:replica_configuration,
-              parent: Google::Sql::Property::InstancReplicaConfigu) do
+  newproperty(:replica_configuration, parent: Google::Sql::Property::InstancReplicaConfigu) do
     desc 'Configuration specific to failover replicas and read replicas.'
   end
 

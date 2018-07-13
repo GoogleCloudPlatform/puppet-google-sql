@@ -25,8 +25,7 @@
 #
 # ----------------------------------------------------------------------------
 
-# Clone a CloudSQL database (requires backups and binary logs to be previously
-# enabled)
+# Clone a CloudSQL database (requires backups and binary logs to be previously enabled)
 #
 # Command line arguments: JSON object from STDIN with the following fields:
 #
