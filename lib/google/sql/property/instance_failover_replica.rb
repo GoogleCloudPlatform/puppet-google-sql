@@ -84,8 +84,7 @@ module Google
       # Data is coming from the GCP API
       class InstancFailoveReplicaApi < InstancFailoveReplica
         def initialize(args)
-          @available =
-            Google::Sql::Property::Boolean.api_munge(args['available'])
+          @available = Google::Sql::Property::Boolean.api_munge(args['available'])
           @name = Google::Sql::Property::String.api_munge(args['name'])
         end
       end
@@ -94,8 +93,7 @@ module Google
       # Data is coming from the Puppet manifest
       class InstancFailoveReplicaCatalog < InstancFailoveReplica
         def initialize(args)
-          @available =
-            Google::Sql::Property::Boolean.unsafe_munge(args['available'])
+          @available = Google::Sql::Property::Boolean.unsafe_munge(args['available'])
           @name = Google::Sql::Property::String.unsafe_munge(args['name'])
         end
       end

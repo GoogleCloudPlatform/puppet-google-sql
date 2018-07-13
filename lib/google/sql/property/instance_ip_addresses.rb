@@ -89,10 +89,8 @@ module Google
       # Data is coming from the GCP API
       class InstancIpAddressApi < InstancIpAddress
         def initialize(args)
-          @ip_address =
-            Google::Sql::Property::String.api_munge(args['ipAddress'])
-          @time_to_retire =
-            Google::Sql::Property::Time.api_munge(args['timeToRetire'])
+          @ip_address = Google::Sql::Property::String.api_munge(args['ipAddress'])
+          @time_to_retire = Google::Sql::Property::Time.api_munge(args['timeToRetire'])
           @type = Google::Sql::Property::Enum.api_munge(args['type'])
         end
       end
@@ -101,10 +99,8 @@ module Google
       # Data is coming from the Puppet manifest
       class InstancIpAddressCatalog < InstancIpAddress
         def initialize(args)
-          @ip_address =
-            Google::Sql::Property::String.unsafe_munge(args['ip_address'])
-          @time_to_retire =
-            Google::Sql::Property::Time.unsafe_munge(args['time_to_retire'])
+          @ip_address = Google::Sql::Property::String.unsafe_munge(args['ip_address'])
+          @time_to_retire = Google::Sql::Property::Time.unsafe_munge(args['time_to_retire'])
           @type = Google::Sql::Property::Enum.unsafe_munge(args['type'])
         end
       end

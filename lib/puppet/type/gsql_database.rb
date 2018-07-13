@@ -30,10 +30,7 @@ require 'google/sql/property/string'
 require 'puppet'
 
 Puppet::Type.newtype(:gsql_database) do
-  @doc = <<-DOC
-    Represents a SQL database inside the Cloud SQL instance, hosted in Google's
-    cloud.
-  DOC
+  @doc = "Represents a SQL database inside the Cloud SQL instance, hosted in Google's cloud."
 
   autorequire(:gauth_credential) do
     credential = self[:credential]
@@ -66,9 +63,7 @@ Puppet::Type.newtype(:gsql_database) do
   end
 
   newparam(:instance, parent: Google::Sql::Property::InstancNameRef) do
-    desc <<-DOC
-      The name of the Cloud SQL instance. This does not include the project ID.
-    DOC
+    desc 'The name of the Cloud SQL instance. This does not include the project ID.'
   end
 
   newproperty(:charset, parent: Google::Sql::Property::String) do
@@ -81,8 +76,8 @@ Puppet::Type.newtype(:gsql_database) do
 
   newproperty(:name, parent: Google::Sql::Property::String) do
     desc <<-DOC
-      The name of the database in the Cloud SQL instance. This does not include
-      the project ID or instance name.
+      The name of the database in the Cloud SQL instance. This does not include the project ID or
+      instance name.
     DOC
   end
 end

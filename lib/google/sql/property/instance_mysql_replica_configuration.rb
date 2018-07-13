@@ -102,22 +102,13 @@ module Google
             { self: ca_certificate, other: other.ca_certificate },
             { self: client_certificate, other: other.client_certificate },
             { self: client_key, other: other.client_key },
-            {
-              self: connect_retry_interval,
-              other: other.connect_retry_interval
-            },
+            { self: connect_retry_interval, other: other.connect_retry_interval },
             { self: dump_file_path, other: other.dump_file_path },
-            {
-              self: master_heartbeat_period,
-              other: other.master_heartbeat_period
-            },
+            { self: master_heartbeat_period, other: other.master_heartbeat_period },
             { self: password, other: other.password },
             { self: ssl_cipher, other: other.ssl_cipher },
             { self: username, other: other.username },
-            {
-              self: verify_server_certificate,
-              other: other.verify_server_certificate
-            }
+            { self: verify_server_certificate, other: other.verify_server_certificate }
           ]
         end
         # rubocop:enable Metrics/MethodLength
@@ -128,27 +119,19 @@ module Google
       class InstaMysqlRepliConfiApi < InstaMysqlRepliConfi
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
-          @ca_certificate =
-            Google::Sql::Property::String.api_munge(args['caCertificate'])
-          @client_certificate =
-            Google::Sql::Property::String.api_munge(args['clientCertificate'])
-          @client_key =
-            Google::Sql::Property::String.api_munge(args['clientKey'])
-          @connect_retry_interval = Google::Sql::Property::Integer.api_munge(
-            args['connectRetryInterval']
-          )
-          @dump_file_path =
-            Google::Sql::Property::String.api_munge(args['dumpFilePath'])
-          @master_heartbeat_period = Google::Sql::Property::Integer.api_munge(
-            args['masterHeartbeatPeriod']
-          )
+          @ca_certificate = Google::Sql::Property::String.api_munge(args['caCertificate'])
+          @client_certificate = Google::Sql::Property::String.api_munge(args['clientCertificate'])
+          @client_key = Google::Sql::Property::String.api_munge(args['clientKey'])
+          @connect_retry_interval =
+            Google::Sql::Property::Integer.api_munge(args['connectRetryInterval'])
+          @dump_file_path = Google::Sql::Property::String.api_munge(args['dumpFilePath'])
+          @master_heartbeat_period =
+            Google::Sql::Property::Integer.api_munge(args['masterHeartbeatPeriod'])
           @password = Google::Sql::Property::String.api_munge(args['password'])
-          @ssl_cipher =
-            Google::Sql::Property::String.api_munge(args['sslCipher'])
+          @ssl_cipher = Google::Sql::Property::String.api_munge(args['sslCipher'])
           @username = Google::Sql::Property::String.api_munge(args['username'])
-          @verify_server_certificate = Google::Sql::Property::Boolean.api_munge(
-            args['verifyServerCertificate']
-          )
+          @verify_server_certificate =
+            Google::Sql::Property::Boolean.api_munge(args['verifyServerCertificate'])
         end
         # rubocop:enable Metrics/MethodLength
       end
@@ -158,32 +141,20 @@ module Google
       class InstaMysqlRepliConfiCatalog < InstaMysqlRepliConfi
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
-          @ca_certificate =
-            Google::Sql::Property::String.unsafe_munge(args['ca_certificate'])
-          @client_certificate = Google::Sql::Property::String.unsafe_munge(
-            args['client_certificate']
-          )
-          @client_key =
-            Google::Sql::Property::String.unsafe_munge(args['client_key'])
-          @connect_retry_interval = Google::Sql::Property::Integer.unsafe_munge(
-            args['connect_retry_interval']
-          )
-          @dump_file_path =
-            Google::Sql::Property::String.unsafe_munge(args['dump_file_path'])
+          @ca_certificate = Google::Sql::Property::String.unsafe_munge(args['ca_certificate'])
+          @client_certificate =
+            Google::Sql::Property::String.unsafe_munge(args['client_certificate'])
+          @client_key = Google::Sql::Property::String.unsafe_munge(args['client_key'])
+          @connect_retry_interval =
+            Google::Sql::Property::Integer.unsafe_munge(args['connect_retry_interval'])
+          @dump_file_path = Google::Sql::Property::String.unsafe_munge(args['dump_file_path'])
           @master_heartbeat_period =
-            Google::Sql::Property::Integer.unsafe_munge(
-              args['master_heartbeat_period']
-            )
-          @password =
-            Google::Sql::Property::String.unsafe_munge(args['password'])
-          @ssl_cipher =
-            Google::Sql::Property::String.unsafe_munge(args['ssl_cipher'])
-          @username =
-            Google::Sql::Property::String.unsafe_munge(args['username'])
+            Google::Sql::Property::Integer.unsafe_munge(args['master_heartbeat_period'])
+          @password = Google::Sql::Property::String.unsafe_munge(args['password'])
+          @ssl_cipher = Google::Sql::Property::String.unsafe_munge(args['ssl_cipher'])
+          @username = Google::Sql::Property::String.unsafe_munge(args['username'])
           @verify_server_certificate =
-            Google::Sql::Property::Boolean.unsafe_munge(
-              args['verify_server_certificate']
-            )
+            Google::Sql::Property::Boolean.unsafe_munge(args['verify_server_certificate'])
         end
         # rubocop:enable Metrics/MethodLength
       end

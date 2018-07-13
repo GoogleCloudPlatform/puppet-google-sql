@@ -51,15 +51,9 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
               allow(Time).to receive(:now).and_return(
                 Time.new(2017, 1, 2, 3, 4, 5)
               )
-              expect_network_get_success 1,
-                                         name: 'title0',
-                                         instance: 'test name#0 data'
-              expect_network_get_success 2,
-                                         name: 'title1',
-                                         instance: 'test name#1 data'
-              expect_network_get_success 3,
-                                         name: 'title2',
-                                         instance: 'test name#2 data'
+              expect_network_get_success 1, name: 'title0', instance: 'test name#0 data'
+              expect_network_get_success 2, name: 'title1', instance: 'test name#1 data'
+              expect_network_get_success 3, name: 'title2', instance: 'test name#2 data'
               expect_network_get_success_instance 1
               expect_network_get_success_instance 2
               expect_network_get_success_instance 3
@@ -124,13 +118,8 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
                 catalog.resource('Gsql_database[title0]').provider
               end
 
-              it do
-                is_expected.to have_attributes(charset: 'test charset#0 data')
-              end
-              it do
-                is_expected
-                  .to have_attributes(collation: 'test collation#0 data')
-              end
+              it { is_expected.to have_attributes(charset: 'test charset#0 data') }
+              it { is_expected.to have_attributes(collation: 'test collation#0 data') }
               it { is_expected.to have_attributes(name: 'title0') }
             end
 
@@ -139,13 +128,8 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
                 catalog.resource('Gsql_database[title1]').provider
               end
 
-              it do
-                is_expected.to have_attributes(charset: 'test charset#1 data')
-              end
-              it do
-                is_expected
-                  .to have_attributes(collation: 'test collation#1 data')
-              end
+              it { is_expected.to have_attributes(charset: 'test charset#1 data') }
+              it { is_expected.to have_attributes(collation: 'test collation#1 data') }
               it { is_expected.to have_attributes(name: 'title1') }
             end
 
@@ -154,13 +138,8 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
                 catalog.resource('Gsql_database[title2]').provider
               end
 
-              it do
-                is_expected.to have_attributes(charset: 'test charset#2 data')
-              end
-              it do
-                is_expected
-                  .to have_attributes(collation: 'test collation#2 data')
-              end
+              it { is_expected.to have_attributes(charset: 'test charset#2 data') }
+              it { is_expected.to have_attributes(collation: 'test collation#2 data') }
               it { is_expected.to have_attributes(name: 'title2') }
             end
           end
@@ -251,13 +230,8 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
                 catalog.resource('Gsql_database[title0]').provider
               end
 
-              it do
-                is_expected.to have_attributes(charset: 'test charset#0 data')
-              end
-              it do
-                is_expected
-                  .to have_attributes(collation: 'test collation#0 data')
-              end
+              it { is_expected.to have_attributes(charset: 'test charset#0 data') }
+              it { is_expected.to have_attributes(collation: 'test collation#0 data') }
               it { is_expected.to have_attributes(name: 'test name#0 data') }
             end
 
@@ -266,13 +240,8 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
                 catalog.resource('Gsql_database[title1]').provider
               end
 
-              it do
-                is_expected.to have_attributes(charset: 'test charset#1 data')
-              end
-              it do
-                is_expected
-                  .to have_attributes(collation: 'test collation#1 data')
-              end
+              it { is_expected.to have_attributes(charset: 'test charset#1 data') }
+              it { is_expected.to have_attributes(collation: 'test collation#1 data') }
               it { is_expected.to have_attributes(name: 'test name#1 data') }
             end
 
@@ -281,13 +250,8 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
                 catalog.resource('Gsql_database[title2]').provider
               end
 
-              it do
-                is_expected.to have_attributes(charset: 'test charset#2 data')
-              end
-              it do
-                is_expected
-                  .to have_attributes(collation: 'test collation#2 data')
-              end
+              it { is_expected.to have_attributes(charset: 'test charset#2 data') }
+              it { is_expected.to have_attributes(collation: 'test collation#2 data') }
               it { is_expected.to have_attributes(name: 'test name#2 data') }
             end
           end
@@ -341,9 +305,7 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
         # Ensure present: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
           before(:each) do
-            expect_network_get_failed 1,
-                                      name: 'title0',
-                                      instance: 'test name#0 data'
+            expect_network_get_failed 1, name: 'title0', instance: 'test name#0 data'
             expect_network_create \
               1,
               {
@@ -354,9 +316,7 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
               },
               name: 'title0',
               instance: 'test name#0 data'
-            expect_network_get_async 1,
-                                     name: 'title0',
-                                     instance: 'test name#0 data'
+            expect_network_get_async 1, name: 'title0', instance: 'test name#0 data'
             expect_network_get_success_instance 1
           end
 
@@ -455,9 +415,7 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
         # Ensure absent: resource missing, ignore, no name, pass
         context 'title == name (pass)' do
           before(:each) do
-            expect_network_get_failed 1,
-                                      name: 'title0',
-                                      instance: 'test name#0 data'
+            expect_network_get_failed 1, name: 'title0', instance: 'test name#0 data'
             expect_network_get_success_instance 1
           end
 
@@ -542,13 +500,9 @@ describe Puppet::Type.type(:gsql_database).provider(:google) do
         # Ensure absent: resource exists, ignore, no name, pass
         context 'title == name (pass)' do
           before(:each) do
-            expect_network_get_success 1,
-                                       name: 'title0',
-                                       instance: 'test name#0 data'
+            expect_network_get_success 1, name: 'title0', instance: 'test name#0 data'
             expect_network_delete 1, 'title0', instance: 'test name#0 data'
-            expect_network_get_async 1,
-                                     name: 'title0',
-                                     instance: 'test name#0 data'
+            expect_network_get_async 1, name: 'title0', instance: 'test name#0 data'
             expect_network_get_success_instance 1
           end
 

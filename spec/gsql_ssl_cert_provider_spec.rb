@@ -234,9 +234,8 @@ describe Puppet::Type.type(:gsql_ssl_cert).provider(:google) do
         % GoogleTests::Constants::SC_PROJECT_DATA.size],
       instance: GoogleTests::Constants::SC_INSTANCE_DATA[(id - 1) \
         % GoogleTests::Constants::SC_INSTANCE_DATA.size],
-      sha1_fingerprint:
-        GoogleTests::Constants::SC_SHA1_FINGERPRINT_DATA[(id - 1) \
-          % GoogleTests::Constants::SC_SHA1_FINGERPRINT_DATA.size]
+      sha1_fingerprint: GoogleTests::Constants::SC_SHA1_FINGERPRINT_DATA[(id - 1) \
+        % GoogleTests::Constants::SC_SHA1_FINGERPRINT_DATA.size]
     )
   end
 
@@ -275,9 +274,8 @@ describe Puppet::Type.type(:gsql_ssl_cert).provider(:google) do
         % GoogleTests::Constants::SC_PROJECT_DATA.size],
       instance: GoogleTests::Constants::SC_INSTANCE_DATA[(id - 1) \
         % GoogleTests::Constants::SC_INSTANCE_DATA.size],
-      sha1_fingerprint:
-        GoogleTests::Constants::SC_SHA1_FINGERPRINT_DATA[(id - 1) \
-          % GoogleTests::Constants::SC_SHA1_FINGERPRINT_DATA.size]
+      sha1_fingerprint: GoogleTests::Constants::SC_SHA1_FINGERPRINT_DATA[(id - 1) \
+        % GoogleTests::Constants::SC_SHA1_FINGERPRINT_DATA.size]
     }
   end
 end

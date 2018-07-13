@@ -51,8 +51,7 @@ Puppet::Type.type(:gsql_user).provide(:google) do
       project = resource[:project]
       debug("prefetch #{name}") if project.nil?
       debug("prefetch #{name} @ #{project}") unless project.nil?
-      fetch = fetch_wrapped_resource(resource, 'sql#user', 'sql#usersList',
-                                     'items')
+      fetch = fetch_wrapped_resource(resource, 'sql#user', 'sql#usersList', 'items')
       resource.provider = present(name, fetch) unless fetch.nil?
     end
   end

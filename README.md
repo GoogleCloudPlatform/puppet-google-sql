@@ -165,17 +165,14 @@ gsql_tier { 'D0':
 * [`gsql_user`][]:
     The Users resource represents a database user in a Cloud SQL instance.
 * [`gsql_ssl_cert`][]:
-    Represents an SSL certificate created for a Cloud SQL instance. To use
-    the
+    Represents an SSL certificate created for a Cloud SQL instance. To use the
     SSL certificate you must have the SSL Client Certificate and the
-    associated SSL Client Key. The Client Key can be downloaded only when
-    the
+    associated SSL Client Key. The Client Key can be downloaded only when the
     SSL certificate is created with the insert method.
 * [`gsql_flag`][]:
     Represents a flag that can be configured for a Cloud SQL instance.
 * [`gsql_tier`][]:
-    The Tiers resource represents a service configuration that can be used
-    to
+    The Tiers resource represents a service configuration that can be used to
     define a Cloud SQL instance. Each tier has an associated RAM, maximum
     storage, and list of regions in which the tier can be used. Available
     tiers vary depending on whether you use PostgreSQL, MySQL Second

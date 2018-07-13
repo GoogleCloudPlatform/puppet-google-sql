@@ -30,9 +30,7 @@ require 'google/sql/property/string'
 require 'puppet'
 
 Puppet::Type.newtype(:gsql_user) do
-  @doc = <<-DOC
-    The Users resource represents a database user in a Cloud SQL instance.
-  DOC
+  @doc = 'The Users resource represents a database user in a Cloud SQL instance.'
 
   autorequire(:gauth_credential) do
     credential = self[:credential]
@@ -65,9 +63,7 @@ Puppet::Type.newtype(:gsql_user) do
   end
 
   newparam(:instance, parent: Google::Sql::Property::InstancNameRef) do
-    desc <<-DOC
-      The name of the Cloud SQL instance. This does not include the project ID.
-    DOC
+    desc 'The name of the Cloud SQL instance. This does not include the project ID.'
   end
 
   newparam(:password, parent: Google::Sql::Property::String) do
@@ -76,10 +72,9 @@ Puppet::Type.newtype(:gsql_user) do
 
   newproperty(:host, parent: Google::Sql::Property::String) do
     desc <<-DOC
-      The host name from which the user can connect. For insert operations,
-      host defaults to an empty string. For update operations, host is
-      specified as part of the request URL. The host name cannot be updated
-      after insertion.
+      The host name from which the user can connect. For insert operations, host defaults to an
+      empty string. For update operations, host is specified as part of the request URL. The host
+      name cannot be updated after insertion.
     DOC
   end
 

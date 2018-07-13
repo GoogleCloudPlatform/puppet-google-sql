@@ -51,8 +51,7 @@ Puppet::Type.type(:gsql_flag).provide(:google) do
       project = resource[:project]
       debug("prefetch #{name}") if project.nil?
       debug("prefetch #{name} @ #{project}") unless project.nil?
-      fetch = fetch_wrapped_resource(resource, 'sql#flag', 'sql#flagsList',
-                                     'items')
+      fetch = fetch_wrapped_resource(resource, 'sql#flag', 'sql#flagsList', 'items')
       resource.provider = present(name, fetch) unless fetch.nil?
     end
   end
@@ -64,16 +63,13 @@ Puppet::Type.type(:gsql_flag).provide(:google) do
 
   def self.fetch_to_hash(fetch)
     {
-      allowed_string_values: Google::Sql::Property::StringArray.api_munge(
-        fetch['allowedStringValues']
-      ),
-      applies_to:
-        Google::Sql::Property::StringArray.api_munge(fetch['appliesTo']),
+      allowed_string_values:
+        Google::Sql::Property::StringArray.api_munge(fetch['allowedStringValues']),
+      applies_to: Google::Sql::Property::StringArray.api_munge(fetch['appliesTo']),
       max_value: Google::Sql::Property::Integer.api_munge(fetch['maxValue']),
       min_value: Google::Sql::Property::Integer.api_munge(fetch['minValue']),
       name: Google::Sql::Property::String.api_munge(fetch['name']),
-      requires_restart:
-        Google::Sql::Property::Boolean.api_munge(fetch['requiresRestart']),
+      requires_restart: Google::Sql::Property::Boolean.api_munge(fetch['requiresRestart']),
       type: Google::Sql::Property::String.api_munge(fetch['type'])
     }.reject { |_, v| v.nil? }
   end

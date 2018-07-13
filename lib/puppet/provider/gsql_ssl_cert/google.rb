@@ -63,12 +63,10 @@ Puppet::Type.type(:gsql_ssl_cert).provide(:google) do
   def self.fetch_to_hash(fetch)
     {
       cert: Google::Sql::Property::String.api_munge(fetch['cert']),
-      cert_serial_number:
-        Google::Sql::Property::String.api_munge(fetch['certSerialNumber']),
+      cert_serial_number: Google::Sql::Property::String.api_munge(fetch['certSerialNumber']),
       common_name: Google::Sql::Property::String.api_munge(fetch['commonName']),
       create_time: Google::Sql::Property::Time.api_munge(fetch['createTime']),
-      expiration_time:
-        Google::Sql::Property::Time.api_munge(fetch['expirationTime'])
+      expiration_time: Google::Sql::Property::Time.api_munge(fetch['expirationTime'])
     }.reject { |_, v| v.nil? }
   end
 

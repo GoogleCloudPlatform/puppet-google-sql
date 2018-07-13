@@ -81,15 +81,9 @@ module Google
         def compare_fields(other)
           [
             { self: failover_target, other: other.failover_target },
-            {
-              self: mysql_replica_configuration,
-              other: other.mysql_replica_configuration
-            },
+            { self: mysql_replica_configuration, other: other.mysql_replica_configuration },
             { self: replica_names, other: other.replica_names },
-            {
-              self: service_account_email_address,
-              other: other.service_account_email_address
-            }
+            { self: service_account_email_address, other: other.service_account_email_address }
           ]
         end
       end
@@ -98,18 +92,12 @@ module Google
       # Data is coming from the GCP API
       class InstancReplicaConfiguApi < InstancReplicaConfigu
         def initialize(args)
-          @failover_target =
-            Google::Sql::Property::Boolean.api_munge(args['failoverTarget'])
+          @failover_target = Google::Sql::Property::Boolean.api_munge(args['failoverTarget'])
           @mysql_replica_configuration =
-            Google::Sql::Property::InstaMysqlRepliConfi.api_munge(
-              args['mysqlReplicaConfiguration']
-            )
-          @replica_names =
-            Google::Sql::Property::StringArray.api_munge(args['replicaNames'])
+            Google::Sql::Property::InstaMysqlRepliConfi.api_munge(args['mysqlReplicaConfiguration'])
+          @replica_names = Google::Sql::Property::StringArray.api_munge(args['replicaNames'])
           @service_account_email_address =
-            Google::Sql::Property::String.api_munge(
-              args['serviceAccountEmailAddress']
-            )
+            Google::Sql::Property::String.api_munge(args['serviceAccountEmailAddress'])
         end
       end
 
@@ -117,19 +105,13 @@ module Google
       # Data is coming from the Puppet manifest
       class InstancReplicaConfiguCatalog < InstancReplicaConfigu
         def initialize(args)
-          @failover_target =
-            Google::Sql::Property::Boolean.unsafe_munge(args['failover_target'])
-          @mysql_replica_configuration =
-            Google::Sql::Property::InstaMysqlRepliConfi.unsafe_munge(
-              args['mysql_replica_configuration']
-            )
-          @replica_names = Google::Sql::Property::StringArray.unsafe_munge(
-            args['replica_names']
+          @failover_target = Google::Sql::Property::Boolean.unsafe_munge(args['failover_target'])
+          @mysql_replica_configuration = Google::Sql::Property::InstaMysqlRepliConfi.unsafe_munge(
+            args['mysql_replica_configuration']
           )
+          @replica_names = Google::Sql::Property::StringArray.unsafe_munge(args['replica_names'])
           @service_account_email_address =
-            Google::Sql::Property::String.unsafe_munge(
-              args['service_account_email_address']
-            )
+            Google::Sql::Property::String.unsafe_munge(args['service_account_email_address'])
         end
       end
     end
