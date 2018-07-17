@@ -45,6 +45,11 @@ Puppet::Type.type(:gsql_ssl_cert).provide(:google) do
   end
 
   def self.prefetch(resources)
+    Puppet.warning [
+      "gsql_ssl_cert will be deprecated in a future release.",
+      "You can use strings to reference GCP SslCert.",
+      "A gsql_ssl_cert is no longer necessary"
+    ].join(" ")
     debug('prefetch')
     resources.each do |name, resource|
       project = resource[:project]

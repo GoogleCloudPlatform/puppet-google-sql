@@ -45,6 +45,11 @@ Puppet::Type.type(:gsql_tier).provide(:google) do
   end
 
   def self.prefetch(resources)
+    Puppet.warning [
+      "gsql_tier will be deprecated in a future release.",
+      "You can use strings to reference GCP Tier.",
+      "A gsql_tier is no longer necessary"
+    ].join(" ")
     debug('prefetch')
     resources.each do |name, resource|
       project = resource[:project]
