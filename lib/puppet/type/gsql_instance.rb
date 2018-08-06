@@ -98,7 +98,7 @@ Puppet::Type.newtype(:gsql_instance) do
     newvalue(:POSTGRES_9_6)
   end
 
-  newproperty(:failover_replica, parent: Google::Sql::Property::InstancFailoveReplica) do
+  newproperty(:failover_replica, parent: Google::Sql::Property::InstanceFailoverReplica) do
     desc <<-DOC
       The name and status of the failover replica. This property is applicable only to Second
       Generation instances.
@@ -117,7 +117,7 @@ Puppet::Type.newtype(:gsql_instance) do
     newvalue(:READ_REPLICA_INSTANCE)
   end
 
-  newproperty(:ip_addresses, parent: Google::Sql::Property::InstancIpAddressArray) do
+  newproperty(:ip_addresses, parent: Google::Sql::Property::InstanceIpAddressesArray) do
     desc 'The assigned IP addresses for the instance. (output only)'
   end
 
@@ -147,7 +147,8 @@ Puppet::Type.newtype(:gsql_instance) do
     DOC
   end
 
-  newproperty(:replica_configuration, parent: Google::Sql::Property::InstancReplicaConfigu) do
+  newproperty(:replica_configuration,
+              parent: Google::Sql::Property::InstanceReplicaConfiguration) do
     desc 'Configuration specific to failover replicas and read replicas.'
   end
 

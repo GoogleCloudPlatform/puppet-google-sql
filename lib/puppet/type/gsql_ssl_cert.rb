@@ -60,7 +60,7 @@ Puppet::Type.newtype(:gsql_ssl_cert) do
     desc 'A Google Cloud Platform project to manage.'
   end
 
-  newparam(:instance, parent: Google::Sql::Property::InstancNameRef) do
+  newparam(:instance, parent: Google::Sql::Property::InstanceNameRef) do
     desc 'The name of the Cloud SQL instance. This does not include the project ID.'
   end
 

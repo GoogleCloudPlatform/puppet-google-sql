@@ -62,7 +62,7 @@ Puppet::Type.newtype(:gsql_database) do
     desc 'The name of the Database.'
   end
 
-  newparam(:instance, parent: Google::Sql::Property::InstancNameRef) do
+  newparam(:instance, parent: Google::Sql::Property::InstanceNameRef) do
     desc 'The name of the Cloud SQL instance. This does not include the project ID.'
   end
 

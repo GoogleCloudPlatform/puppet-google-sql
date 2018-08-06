@@ -85,7 +85,7 @@ module Google
       class InstanceSettingsApi < InstanceSettings
         def initialize(args)
           @ip_configuration =
-            Google::Sql::Property::InstancIpConfigu.api_munge(args['ipConfiguration'])
+            Google::Sql::Property::InstanceIpConfiguration.api_munge(args['ipConfiguration'])
           @tier = Google::Sql::Property::String.api_munge(args['tier'])
         end
       end
@@ -95,7 +95,7 @@ module Google
       class InstanceSettingsCatalog < InstanceSettings
         def initialize(args)
           @ip_configuration =
-            Google::Sql::Property::InstancIpConfigu.unsafe_munge(args['ip_configuration'])
+            Google::Sql::Property::InstanceIpConfiguration.unsafe_munge(args['ip_configuration'])
           @tier = Google::Sql::Property::String.unsafe_munge(args['tier'])
         end
       end

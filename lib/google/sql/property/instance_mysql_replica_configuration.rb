@@ -31,7 +31,7 @@ module Google
   module Sql
     module Data
       # A class to manage data for MysqlReplicaConfiguration for instance.
-      class InstaMysqlRepliConfi
+      class InstanceMysqlReplicaConfiguration
         include Comparable
 
         attr_reader :ca_certificate
@@ -76,7 +76,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstaMysqlRepliConfi
+          return false unless other.is_a? InstanceMysqlReplicaConfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -85,7 +85,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstaMysqlRepliConfi
+          return false unless other.is_a? InstanceMysqlReplicaConfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -114,9 +114,9 @@ module Google
         # rubocop:enable Metrics/MethodLength
       end
 
-      # Manages a InstaMysqlRepliConfi nested object
+      # Manages a InstanceMysqlReplicaConfiguration nested object
       # Data is coming from the GCP API
-      class InstaMysqlRepliConfiApi < InstaMysqlRepliConfi
+      class InstanceMysqlReplicaConfigurationApi < InstanceMysqlReplicaConfiguration
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
           @ca_certificate = Google::Sql::Property::String.api_munge(args['caCertificate'])
@@ -136,9 +136,9 @@ module Google
         # rubocop:enable Metrics/MethodLength
       end
 
-      # Manages a InstaMysqlRepliConfi nested object
+      # Manages a InstanceMysqlReplicaConfiguration nested object
       # Data is coming from the Puppet manifest
-      class InstaMysqlRepliConfiCatalog < InstaMysqlRepliConfi
+      class InstanceMysqlReplicaConfigurationCatalog < InstanceMysqlReplicaConfiguration
         # rubocop:disable Metrics/MethodLength
         def initialize(args)
           @ca_certificate = Google::Sql::Property::String.unsafe_munge(args['ca_certificate'])
@@ -162,7 +162,7 @@ module Google
 
     module Property
       # A class to manage input to MysqlReplicaConfiguration for instance.
-      class InstaMysqlRepliConfi < Google::Sql::Property::Base
+      class InstanceMysqlReplicaConfiguration < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
           self.class.unsafe_munge(value)
@@ -171,13 +171,13 @@ module Google
         # Used for parsing Puppet catalog
         def self.unsafe_munge(value)
           return if value.nil?
-          Data::InstaMysqlRepliConfiCatalog.new(value)
+          Data::InstanceMysqlReplicaConfigurationCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_munge(value)
           return if value.nil?
-          Data::InstaMysqlRepliConfiApi.new(value)
+          Data::InstanceMysqlReplicaConfigurationApi.new(value)
         end
       end
     end
