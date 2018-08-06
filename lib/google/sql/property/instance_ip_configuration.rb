@@ -31,7 +31,7 @@ module Google
   module Sql
     module Data
       # A class to manage data for IpConfiguration for instance.
-      class InstancIpConfigu
+      class InstanceIpConfiguration
         include Comparable
 
         attr_reader :ipv4_enabled
@@ -57,7 +57,7 @@ module Google
         end
 
         def ==(other)
-          return false unless other.is_a? InstancIpConfigu
+          return false unless other.is_a? InstanceIpConfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             return false if compare[:self] != compare[:other]
@@ -66,7 +66,7 @@ module Google
         end
 
         def <=>(other)
-          return false unless other.is_a? InstancIpConfigu
+          return false unless other.is_a? InstanceIpConfiguration
           compare_fields(other).each do |compare|
             next if compare[:self].nil? || compare[:other].nil?
             result = compare[:self] <=> compare[:other]
@@ -86,25 +86,27 @@ module Google
         end
       end
 
-      # Manages a InstancIpConfigu nested object
+      # Manages a InstanceIpConfiguration nested object
       # Data is coming from the GCP API
-      class InstancIpConfiguApi < InstancIpConfigu
+      class InstanceIpConfigurationApi < InstanceIpConfiguration
         def initialize(args)
           @ipv4_enabled = Google::Sql::Property::Boolean.api_munge(args['ipv4Enabled'])
-          @authorized_networks =
-            Google::Sql::Property::InstancAuthoriNetworkArray.api_munge(args['authorizedNetworks'])
+          @authorized_networks = Google::Sql::Property::InstanceAuthorizedNetworksArray.api_munge(
+            args['authorizedNetworks']
+          )
           @require_ssl = Google::Sql::Property::Boolean.api_munge(args['requireSsl'])
         end
       end
 
-      # Manages a InstancIpConfigu nested object
+      # Manages a InstanceIpConfiguration nested object
       # Data is coming from the Puppet manifest
-      class InstancIpConfiguCatalog < InstancIpConfigu
+      class InstanceIpConfigurationCatalog < InstanceIpConfiguration
         def initialize(args)
           @ipv4_enabled = Google::Sql::Property::Boolean.unsafe_munge(args['ipv4_enabled'])
-          @authorized_networks = Google::Sql::Property::InstancAuthoriNetworkArray.unsafe_munge(
-            args['authorized_networks']
-          )
+          @authorized_networks =
+            Google::Sql::Property::InstanceAuthorizedNetworksArray.unsafe_munge(
+              args['authorized_networks']
+            )
           @require_ssl = Google::Sql::Property::Boolean.unsafe_munge(args['require_ssl'])
         end
       end
@@ -112,7 +114,7 @@ module Google
 
     module Property
       # A class to manage input to IpConfiguration for instance.
-      class InstancIpConfigu < Google::Sql::Property::Base
+      class InstanceIpConfiguration < Google::Sql::Property::Base
         # Used for parsing Puppet catalog
         def unsafe_munge(value)
           self.class.unsafe_munge(value)
@@ -121,13 +123,13 @@ module Google
         # Used for parsing Puppet catalog
         def self.unsafe_munge(value)
           return if value.nil?
-          Data::InstancIpConfiguCatalog.new(value)
+          Data::InstanceIpConfigurationCatalog.new(value)
         end
 
         # Used for parsing GCP API responses
         def self.api_munge(value)
           return if value.nil?
-          Data::InstancIpConfiguApi.new(value)
+          Data::InstanceIpConfigurationApi.new(value)
         end
       end
     end
