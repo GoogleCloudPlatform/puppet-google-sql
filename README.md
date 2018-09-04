@@ -285,6 +285,7 @@ gsql_instance { 'id-of-resource':
       ipv4_enabled        => boolean,
       require_ssl         => boolean,
     },
+    settings_version => integer,
     tier             => string,
   },
   project               => string,
@@ -468,6 +469,12 @@ Required.  Name of the Cloud SQL instance. This does not include the project
   example db-n1-standard-1. For MySQL instances, this field
   determines whether the instance is Second Generation (recommended)
   or First Generation.
+
+##### settings/settings_version
+Output only.  The version of instance settings. This is a required field for
+  update method to make sure concurrent updates are handled properly.
+  During update, use the most recent settingsVersion value for this
+  instance and do not try to update this value.
 
 
 ##### Output-only properties

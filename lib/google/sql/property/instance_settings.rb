@@ -36,18 +36,21 @@ module Google
 
         attr_reader :ip_configuration
         attr_reader :tier
+        attr_reader :settings_version
 
         def to_json(_arg = nil)
           {
             'ipConfiguration' => ip_configuration,
-            'tier' => tier
+            'tier' => tier,
+            'settingsVersion' => settings_version
           }.reject { |_k, v| v.nil? }.to_json
         end
 
         def to_s
           {
             ip_configuration: ip_configuration,
-            tier: tier
+            tier: tier,
+            settings_version: settings_version
           }.reject { |_k, v| v.nil? }.map { |k, v| "#{k}: #{v}" }.join(', ')
         end
 
@@ -75,7 +78,8 @@ module Google
         def compare_fields(other)
           [
             { self: ip_configuration, other: other.ip_configuration },
-            { self: tier, other: other.tier }
+            { self: tier, other: other.tier },
+            { self: settings_version, other: other.settings_version }
           ]
         end
       end
@@ -87,6 +91,7 @@ module Google
           @ip_configuration =
             Google::Sql::Property::InstanceIpConfiguration.api_munge(args['ipConfiguration'])
           @tier = Google::Sql::Property::String.api_munge(args['tier'])
+          @settings_version = Google::Sql::Property::Integer.api_munge(args['settingsVersion'])
         end
       end
 
@@ -97,6 +102,7 @@ module Google
           @ip_configuration =
             Google::Sql::Property::InstanceIpConfiguration.unsafe_munge(args['ip_configuration'])
           @tier = Google::Sql::Property::String.unsafe_munge(args['tier'])
+          @settings_version = Google::Sql::Property::Integer.unsafe_munge(args['settings_version'])
         end
       end
     end
