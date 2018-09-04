@@ -112,6 +112,7 @@ describe Puppet::Type.type(:gsql_instance).provider(:google) do
                       ipv4_enabled        => true,
                       require_ssl         => true,
                     },
+                    settings_version => 1508110470,
                     tier             => 'test tier#0 data',
                   },
                   project               => 'test project#0 data',
@@ -181,6 +182,7 @@ describe Puppet::Type.type(:gsql_instance).provider(:google) do
                       ipv4_enabled        => false,
                       require_ssl         => false,
                     },
+                    settings_version => 3016220941,
                     tier             => 'test tier#1 data',
                   },
                   project               => 'test project#1 data',
@@ -235,6 +237,7 @@ describe Puppet::Type.type(:gsql_instance).provider(:google) do
                       ipv4_enabled        => true,
                       require_ssl         => true,
                     },
+                    settings_version => 4524331411,
                     tier             => 'test tier#2 data',
                   },
                   project               => 'test project#2 data',
@@ -428,6 +431,7 @@ describe Puppet::Type.type(:gsql_instance).provider(:google) do
                       ipv4_enabled        => true,
                       require_ssl         => true,
                     },
+                    settings_version => 1508110470,
                     tier             => 'test tier#0 data',
                   },
                   project               => 'test project#0 data',
@@ -498,6 +502,7 @@ describe Puppet::Type.type(:gsql_instance).provider(:google) do
                       ipv4_enabled        => false,
                       require_ssl         => false,
                     },
+                    settings_version => 3016220941,
                     tier             => 'test tier#1 data',
                   },
                   project               => 'test project#1 data',
@@ -553,6 +558,7 @@ describe Puppet::Type.type(:gsql_instance).provider(:google) do
                       ipv4_enabled        => true,
                       require_ssl         => true,
                     },
+                    settings_version => 4524331411,
                     tier             => 'test tier#2 data',
                   },
                   project               => 'test project#2 data',
@@ -775,7 +781,8 @@ describe Puppet::Type.type(:gsql_instance).provider(:google) do
                     ],
                     'requireSsl' => true
                   },
-                  'tier' => 'test tier#0 data'
+                  'tier' => 'test tier#0 data',
+                  'settingsVersion' => 1_508_110_470
                 }
               },
               name: 'title0'
@@ -839,6 +846,7 @@ describe Puppet::Type.type(:gsql_instance).provider(:google) do
                     ipv4_enabled        => true,
                     require_ssl         => true,
                   },
+                  settings_version => 1508110470,
                   tier             => 'test tier#0 data',
                 },
                 project               => 'test project#0 data',
@@ -921,7 +929,8 @@ describe Puppet::Type.type(:gsql_instance).provider(:google) do
                   ],
                   'requireSsl' => true
                 },
-                'tier' => 'test tier#0 data'
+                'tier' => 'test tier#0 data',
+                'settingsVersion' => 1_508_110_470
               }
             expect_network_get_async 1
             # rubocop:enable Metrics/LineLength
@@ -984,6 +993,7 @@ describe Puppet::Type.type(:gsql_instance).provider(:google) do
                     ipv4_enabled        => true,
                     require_ssl         => true,
                   },
+                  settings_version => 1508110470,
                   tier             => 'test tier#0 data',
                 },
                 project               => 'test project#0 data',
