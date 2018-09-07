@@ -144,8 +144,7 @@ Puppet::Type.type(:gsql_instance).provide(:google) do
 
   def exports
     {
-      name: resource[:name],
-      project: resource[:project]
+      name: resource[:name]
     }
   end
 
