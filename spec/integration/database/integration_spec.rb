@@ -24,25 +24,36 @@
 #     CONTRIBUTING.md located at the root of this package.
 #
 # ----------------------------------------------------------------------------
+require 'spec_helper'
+require 'vcr'
 
-source 'https://rubygems.org'
-group :test do
-  gem 'google-api-client'
-  gem 'googleauth'
-  gem 'metadata-json-lint'
-  gem 'parallel_tests'
-  gem 'puppet', ENV['PUPPET_GEM_VERSION'] || '>= 4.2.0'
-  gem 'puppet-lint'
-  gem 'puppet-lint-unquoted_string-check'
-  gem 'puppet-syntax'
-  gem 'puppetlabs_spec_helper'
-  gem 'rake', '~> 10.0'
-  gem 'rspec'
-  gem 'rspec-mocks'
-  gem 'rspec-puppet'
-  gem 'rubocop'
-  gem 'semantic_puppet'
-  gem 'simplecov'
-  gem 'vcr'
-  gem 'webmock'
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/cassettes'
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+end
+
+describe 'database.create', vcr: true do
+  it 'creates and destroys non-existent database' do
+    puts 'pre-destroying database'
+    VCR.use_cassette('pre_destroy_database') do
+      run_example('delete_database')
+    end
+    puts 'creating database'
+    VCR.use_cassette('create_database') do
+      run_example('database')
+    end
+    puts 'checking that database is created'
+    VCR.use_cassette('check_database') do
+      validate_no_flush_calls('database')
+    end
+    puts 'destroying database'
+    VCR.use_cassette('destroy_database') do
+      run_example('delete_database')
+    end
+    puts 'confirming database destroyed'
+    VCR.use_cassette('check_destroy_database') do
+      validate_no_flush_calls('delete_database')
+    end
+  end
 end
