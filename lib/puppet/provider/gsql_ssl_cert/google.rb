@@ -55,7 +55,7 @@ Puppet::Type.type(:gsql_ssl_cert).provide(:google) do
       project = resource[:project]
       debug("prefetch #{name}") if project.nil?
       debug("prefetch #{name} @ #{project}") unless project.nil?
-      fetch = fetch_resource(resource, self_link(resource), 'sql#sslCert')
+      fetch = fetch_wrapped_resource(resource, 'sql#sslCert', 'sql#sslCertsList', 'items')
       resource.provider = present(name, fetch) unless fetch.nil?
     end
   end
@@ -118,6 +118,16 @@ Puppet::Type.type(:gsql_ssl_cert).provide(:google) do
     }.reject { |_, v| v.nil? }
     debug "request: #{request}" unless ENV['PUPPET_HTTP_DEBUG'].nil?
     request.to_json
+  end
+
+  def unwrap_resource_filter(resource)
+    self.class.unwrap_resource_filter(resource)
+  end
+
+  def self.unwrap_resource_filter(resource)
+    {
+      sha1_fingerprint: resource[:sha1_fingerprint]
+    }
   end
 
   def fetch_auth(resource)
@@ -208,6 +218,36 @@ Puppet::Type.type(:gsql_ssl_cert).provide(:google) do
       self_link, fetch_auth(resource)
     )
     return_if_object get_request.send, kind, true
+  end
+
+  def fetch_wrapped_resource(resource, kind, wrap_kind, wrap_path)
+    self.class.fetch_wrapped_resource(resource, kind, wrap_kind, wrap_path)
+  end
+
+  def self.fetch_wrapped_resource(resource, kind, wrap_kind, wrap_path)
+    result = fetch_resource(resource, self_link(resource), wrap_kind)
+    return if result.nil? || !result.key?(wrap_path)
+    result = unwrap_resource(result[wrap_path], resource)
+    return if result.nil?
+    raise "Incorrect result: #{result['kind']} (expected #{kind})" \
+      unless result['kind'] == kind
+    result
+  end
+
+  def unwrap_resource(result, resource)
+    self.class.unwrap_resource(result, resource)
+  end
+
+  def self.unwrap_resource(result, resource)
+    query_predicate = unwrap_resource_filter(resource)
+    matches = result.select do |entry|
+      query_predicate.all? do |k, v|
+        entry[k.id2name] == v
+      end
+    end
+    raise "More than 1 result found: #{matches}" if matches.size > 1
+    return if matches.empty?
+    matches.first
   end
 
   def self.raise_if_errors(response, err_path, msg_field)
